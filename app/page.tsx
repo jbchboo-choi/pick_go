@@ -5,8 +5,8 @@ import Image from 'next/image';
 import {
   Accessibility, ArrowDown, ArrowDownRight, ArrowLeft, ArrowRight, ArrowUp, ArrowUpRight,
   BatteryFull, Briefcase, CarTaxiFront, Check, Circle, CircleCheckBig, Clock, CornerUpRight,
-  LoaderCircle, LocateFixed, MapPin, Moon, Quote, RotateCcw, Search, Signal, TrainFront,
-  TriangleAlert, UserRound, Wifi, X, Zap, type LucideIcon,
+  GitCompareArrows, ListFilter, LoaderCircle, LocateFixed, MapPin, Moon, Quote, RotateCcw,
+  Route, Search, Signal, TrainFront, TriangleAlert, UserRound, Wifi, X, Zap, type LucideIcon,
 } from 'lucide-react';
 import { ConditionId, conditions, destinations, scenarios } from './mock-data';
 
@@ -316,11 +316,30 @@ export default function Home() {
       <ScreenGallery />
 
       <section className="story-section" id="story">
-        <div className="story-intro"><p className="eyebrow">WHY PICKGO</p><h2>정보가 많아서가 아니라,<br />결정할 것이 많아서 힘들었습니다.</h2><p>목적지를 입력한 뒤 다시 조건을 고르고, 여러 경로를 비교하는 대신 PickGo는 목적지와 상태를 함께 받아 하나의 행동으로 연결합니다.</p></div>
-        <div className="story-shift" aria-label="기존 서비스와 PickGo의 차이">
-          <div><small>AS–IS</small><strong>정보를 검색하고<br />경로를 직접 비교</strong></div>
-          <ArrowRight aria-hidden="true" />
-          <div><small>TO–BE</small><strong>상태를 이해하고<br />한 가지 길을 제안</strong></div>
+        <div className="story-lead-grid">
+          <div className="story-intro"><p className="eyebrow">WHY PICKGO</p><h2>정보가 많아서가 아니라,<br />결정할 것이 많아서 힘들었습니다.</h2><p>목적지를 입력한 뒤 다시 조건을 고르고, 여러 경로를 비교하는 대신 PickGo는 목적지와 상태를 함께 받아 하나의 행동으로 연결합니다.</p></div>
+          <aside className="story-principle" aria-label="PickGo 핵심 원칙">
+            <span>PICKGO CORE</span>
+            <Route aria-hidden="true" />
+            <strong>오늘의 상태까지 이해한<br />하나의 추천 경로</strong>
+            <p>가장 빠른 길만 계산하지 않고,<br />지금 실제로 이동하기 좋은 길을 제안합니다.</p>
+            <div><b>상태 반영</b><b>1–PATH</b><b>즉시 안내</b></div>
+          </aside>
+        </div>
+        <div className="story-decision-flow" aria-label="기존 경로 탐색과 PickGo의 의사결정 과정 비교">
+          <div className="story-flow-copy">
+            <small>DECISION FLOW</small>
+            <h3>세 번의 판단을,<br />한 번의 선택으로.</h3>
+          </div>
+          <div className="story-step-track">
+            <article><span><Search aria-hidden="true" /></span><small>STEP 01</small><strong>목적지 검색</strong></article>
+            <ArrowRight aria-hidden="true" className="story-step-arrow" />
+            <article><span><ListFilter aria-hidden="true" /></span><small>STEP 02</small><strong>조건 다시 설정</strong></article>
+            <ArrowRight aria-hidden="true" className="story-step-arrow" />
+            <article><span><GitCompareArrows aria-hidden="true" /></span><small>STEP 03</small><strong>여러 경로 비교</strong></article>
+            <ArrowRight aria-hidden="true" className="story-step-arrow" />
+            <article className="pickgo-step"><span><Route aria-hidden="true" /></span><small>PICKGO</small><strong>지금 맞는 길 1개</strong></article>
+          </div>
         </div>
       </section>
 
