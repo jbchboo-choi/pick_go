@@ -15,4 +15,14 @@ npm run dev
 npm run check
 ```
 
+## Deployment
+
+GitHub `main` 브랜치가 Vercel 프로덕션 환경과 연결되어 있습니다.
+
+```text
+local commit → git push origin main → Vercel automatic production deployment
+```
+
+기능 브랜치나 Pull Request의 커밋은 Preview Deployment로 생성되고, `main` 브랜치에 반영된 커밋은 Production Deployment로 자동 배포됩니다.
+
 서비스 기획 근거는 상위 디렉터리의 `1_Research`, `2_Discovery`, `3_Planning` 문서를 참고합니다.
