@@ -315,25 +315,12 @@ export default function Home() {
 
       <ScreenGallery />
 
-      <section className="system-flow-section" id="flow">
-        <div className="system-flow-head"><p className="eyebrow">PICKGO USER FLOW</p><h2>입력부터 도착까지,<br />판단은 줄이고 대응은 빠르게.</h2><p>첨부 플로우의 핵심 원리를 포트폴리오 데모에 맞춰 실제 인터랙션으로 단순화했습니다.</p></div>
-        <div className="system-flow-grid">
-          <FlowCard no="01" title="통합 입력" subtitle="Combined Input" items={['목적지 직접 입력', '현재 상태 원탭 선택']} accent="green" />
-          <FlowCard no="02" title="가중치 매칭" subtitle="Mock Logic Engine" items={['교통·날씨 예시 데이터', '상태별 우선순위 계산']} accent="blue" />
-          <FlowCard no="03" title="결정과 안내" subtitle="1-Path Decision" items={['최적 경로 1개', '추천 이동수단 매칭']} accent="green" />
-          <FlowCard no="04" title="능동 대응" subtitle="Active Guard" items={['지연 예시 감지', '원탭 수단 전환']} accent="orange" />
-          <FlowCard no="05" title="도착 완료" subtitle="Arrival" items={['최종 출구 안내', '절약 가치 리포트']} accent="green" />
-        </div>
-        <div className="key-logic-bar"><div><span>KEY 01</span><strong>목적지+상태 동시 입력</strong><small>중간 비교 화면 생략</small></div><i /><div><span>KEY 02</span><strong>배리어프리 우선순위</strong><small>비·짐·통증에 따라 가중치 변경</small></div><i /><div><span>KEY 03</span><strong>스마트 리라우팅</strong><small>돌발 상황에 이동수단까지 재매칭</small></div></div>
-      </section>
-
       <section className="story-section" id="story">
         <div className="story-intro"><p className="eyebrow">WHY PICKGO</p><h2>정보가 많아서가 아니라,<br />결정할 것이 많아서 힘들었습니다.</h2><p>목적지를 입력한 뒤 다시 조건을 고르고, 여러 경로를 비교하는 대신 PickGo는 목적지와 상태를 함께 받아 하나의 행동으로 연결합니다.</p></div>
-        <div className="insight-number"><span>단일 경로 선호도</span><strong>4.2</strong><small>5점 만점 · 사용자 조사 10명</small></div>
-        <div className="value-grid">
-          <article><span>01</span><h3>Combined Input</h3><p>목적지와 상태를 한 화면에서 받아 불필요한 설정 단계를 줄입니다.</p></article>
-          <article><span>02</span><h3>Dynamic Weighting</h3><p>급함, 피로, 짐, 이동 불편에 따라 경로의 우선순위를 다르게 계산합니다.</p></article>
-          <article><span>03</span><h3>Active Guard</h3><p>이동 중 변수에는 재검색 대신 이동수단 전환과 우회 경로를 제안합니다.</p></article>
+        <div className="story-shift" aria-label="기존 서비스와 PickGo의 차이">
+          <div><small>AS–IS</small><strong>정보를 검색하고<br />경로를 직접 비교</strong></div>
+          <ArrowRight aria-hidden="true" />
+          <div><small>TO–BE</small><strong>상태를 이해하고<br />한 가지 길을 제안</strong></div>
         </div>
       </section>
 
@@ -363,19 +350,31 @@ export default function Home() {
 
         <div className="research-voices">
           <article className="research-voice-card">
-            <div className="research-person-photo person-one" role="img" aria-label="캐리어를 든 출퇴근 사용자 이미지" />
-            <blockquote><Quote aria-hidden="true" /><p>“짐이 많을 때는 최단 시간보다<br /><strong>계단이 없고 덜 걷는 경로</strong>가 필요해요.”</p><footer><b>익명 응답자 05</b><span>출퇴근 지도 앱 사용자</span></footer></blockquote>
+            <div className="research-person-photo"><Image src="/research-pregnant.png" alt="지하철 엘리베이터 앞의 임산부 이용자" fill sizes="(max-width: 780px) 100vw, 33vw" /></div>
+            <blockquote><Quote aria-hidden="true" /><p>“임신한 날에는 몇 분 빠른 길보다<br /><strong>엘리베이터와 덜 걷는 동선</strong>이 더 중요해요.”</p><footer><b>리서치 페르소나 · 임산부</b><span>에너지 보존형 이동 니즈</span></footer></blockquote>
           </article>
           <article className="research-voice-card">
-            <div className="research-person-photo person-two" role="img" aria-label="이동 중인 직장인 사용자 이미지" />
-            <blockquote><Quote aria-hidden="true" /><p>“시간에 쫓길 때 여러 경로를 비교하면<br /><strong>무엇이 최선인지 더 막막해져요.</strong>”</p><footer><b>익명 응답자 01</b><span>외근이 잦은 직장인</span></footer></blockquote>
+            <div className="research-person-photo"><Image src="/research-wheelchair.png" alt="넓은 지하철 통로를 이동하는 휠체어 이용자" fill sizes="(max-width: 780px) 100vw, 33vw" /></div>
+            <blockquote><Quote aria-hidden="true" /><p>“계단이 한 구간이라도 포함되면<br /><strong>그 경로는 제게 선택지가 아니에요.</strong>”</p><footer><b>리서치 페르소나 · 휠체어 이용자</b><span>배리어프리 경로 니즈</span></footer></blockquote>
           </article>
           <article className="research-voice-card">
-            <div className="research-person-photo person-three" role="img" aria-label="버스 앞에서 휴대폰을 확인하는 사용자 이미지" />
-            <blockquote><Quote aria-hidden="true" /><p>“갑작스러운 지연이나 공사까지<br /><strong>빠르게 반영되는 안내</strong>가 필요해요.”</p><footer><b>익명 응답자 10</b><span>대중교통 중심 이용자</span></footer></blockquote>
+            <div className="research-person-photo"><Image src="/research-luggage.png" alt="지하철에서 캐리어를 끄는 이용자" fill sizes="(max-width: 780px) 100vw, 33vw" /></div>
+            <blockquote><Quote aria-hidden="true" /><p>“짐이 많을 때는 최단 시간보다<br /><strong>계단이 없고 덜 걷는 경로</strong>가 필요해요.”</p><footer><b>리서치 페르소나 · 짐이 많은 이용자</b><span>최소 보행 경로 니즈</span></footer></blockquote>
           </article>
         </div>
-        <p className="research-source-note">SOURCE · PickGo 사용자 인터뷰, 2026.04.03–04.05 · n=10 · 인물 이미지는 익명성을 위해 연출된 이미지입니다.</p>
+        <p className="research-source-note">SOURCE · PickGo 사용자 인터뷰 및 타깃 사용자 그룹, 2026.04.03–04.05 · n=10 · 인물과 문구는 익명성 보호를 위해 리서치 기반으로 재구성했습니다.</p>
+      </section>
+
+      <section className="system-flow-section" id="flow">
+        <div className="system-flow-head"><p className="eyebrow">PICKGO USER FLOW</p><h2>입력부터 도착까지,<br />판단은 줄이고 대응은 빠르게.</h2><p>첨부 플로우의 핵심 원리를 포트폴리오 데모에 맞춰 실제 인터랙션으로 단순화했습니다.</p></div>
+        <div className="system-flow-grid">
+          <FlowCard no="01" title="통합 입력" subtitle="Combined Input" items={['목적지 직접 입력', '현재 상태 원탭 선택']} accent="green" />
+          <FlowCard no="02" title="가중치 매칭" subtitle="Mock Logic Engine" items={['교통·날씨 예시 데이터', '상태별 우선순위 계산']} accent="blue" />
+          <FlowCard no="03" title="결정과 안내" subtitle="1-Path Decision" items={['최적 경로 1개', '추천 이동수단 매칭']} accent="green" />
+          <FlowCard no="04" title="능동 대응" subtitle="Active Guard" items={['지연 예시 감지', '원탭 수단 전환']} accent="orange" />
+          <FlowCard no="05" title="도착 완료" subtitle="Arrival" items={['최종 출구 안내', '절약 가치 리포트']} accent="green" />
+        </div>
+        <div className="key-logic-bar"><div><span>KEY 01</span><strong>목적지+상태 동시 입력</strong><small>중간 비교 화면 생략</small></div><i /><div><span>KEY 02</span><strong>배리어프리 우선순위</strong><small>비·짐·통증에 따라 가중치 변경</small></div><i /><div><span>KEY 03</span><strong>스마트 리라우팅</strong><small>돌발 상황에 이동수단까지 재매칭</small></div></div>
       </section>
 
       <section className="reference-section">
