@@ -358,7 +358,7 @@ export default function Home() {
             <blockquote><Quote aria-hidden="true" /><p>“계단이 한 구간이라도 포함되면<br /><strong>그 경로는 제게 선택지가 아니에요.</strong>”</p><footer><b>리서치 페르소나 · 휠체어 이용자</b><span>배리어프리 경로 니즈</span></footer></blockquote>
           </article>
           <article className="research-voice-card">
-            <div className="research-person-photo"><Image src="/research-luggage.png" alt="지하철에서 캐리어를 끄는 이용자" fill sizes="(max-width: 780px) 100vw, 33vw" /></div>
+            <div className="research-person-photo luggage-photo"><Image src="/research-luggage.png" alt="지하철에서 캐리어를 끄는 이용자" fill sizes="(max-width: 780px) 100vw, 33vw" /></div>
             <blockquote><Quote aria-hidden="true" /><p>“짐이 많을 때는 최단 시간보다<br /><strong>계단이 없고 덜 걷는 경로</strong>가 필요해요.”</p><footer><b>리서치 페르소나 · 짐이 많은 이용자</b><span>최소 보행 경로 니즈</span></footer></blockquote>
           </article>
         </div>

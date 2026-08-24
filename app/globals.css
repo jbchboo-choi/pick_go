@@ -565,6 +565,7 @@ svg.lucide { width:24px; height:24px; flex:0 0 24px; display:block; stroke-width
 .research-person-photo { height:360px; position:relative; overflow:hidden; background:#e8eef5; }
 .research-person-photo::after { content:''; position:absolute; z-index:1; inset:45% 0 0; background:linear-gradient(180deg,transparent,rgba(11,26,45,.38)); pointer-events:none; }
 .research-person-photo img { object-fit:cover; object-position:center 48%; }
+.research-person-photo.luggage-photo img { object-position:center 14%; }
 .research-voice-card blockquote { min-height:180px; margin:-34px 14px 14px; padding:23px 21px 20px; position:relative; z-index:2; border-radius:17px; background:#fff; box-shadow:0 14px 30px rgba(25,48,79,.13); }
 .research-voice-card blockquote::before { content:''; width:20px; height:20px; position:absolute; left:28px; top:-8px; border-radius:3px; background:#fff; transform:rotate(45deg); }
 .research-voice-card blockquote>svg { position:relative; z-index:1; color:var(--primary); }
