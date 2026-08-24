@@ -258,7 +258,7 @@ export default function Home() {
 }
 
 function PickGoLogo() {
-  return <span className="pickgo-wordmark" aria-label="PickGo"><span className="wordmark-pick">Pick</span><span className="wordmark-go">Go</span><span className="wordmark-check" aria-hidden="true">✓</span></span>;
+  return <span className="pickgo-wordmark" aria-label="PickGo"><span className="wordmark-pick">Pick</span><span className="wordmark-go">Go</span><span className="wordmark-check" aria-hidden="true" /></span>;
 }
 
 function getContextTone(item: string) {
