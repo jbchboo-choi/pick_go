@@ -1,9 +1,18 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ConditionId, conditions, destinations, scenarios } from './mock-data';
 
 type Step = 'input' | 'matching' | 'route' | 'guide' | 'arrival';
+
+const prototypeConditionOrder: ConditionId[] = ['urgent', 'tired', 'barrierFree', 'luggage', 'schedule'];
+const prototypeConditionMeta: Record<ConditionId, { icon: string; label: string }> = {
+  urgent: { icon: '⚡', label: '급해요' },
+  tired: { icon: '☾', label: '피곤해요' },
+  barrierFree: { icon: '♿', label: '배리어프리' },
+  luggage: { icon: '▣', label: '짐이 많아요' },
+  schedule: { icon: '◷', label: '늦으면 안 돼요' },
+};
 
 export default function Home() {
   const [step, setStep] = useState<Step>('input');
@@ -19,8 +28,6 @@ export default function Home() {
   const condition = conditions.find((item) => item.id === selected);
   const scenario = selected ? scenarios[selected] : null;
   const displayDestination = destination || scenario?.destination || '';
-  const progress = useMemo(() => ({ input: 18, matching: 40, route: 62, guide: 84, arrival: 100 }[step]), [step]);
-
   useEffect(() => {
     if (step !== 'matching' || !scenario) return;
     const timer = window.setTimeout(() => {
@@ -98,44 +105,34 @@ export default function Home() {
             <div className="phone-device-shell">
               <div className="phone-statusbar"><strong>9:41</strong><span>●  Wi-Fi  ▰</span></div>
               <section className={`condition-panel flow-panel ${selected === 'urgent' && step === 'guide' ? 'assistive' : ''}`} aria-label="PickGo 통합 경로 체험">
-            <div className="panel-head">
-              <span className="location-dot" /><span>출발지</span><strong>서울역</strong>
-              {step !== 'input' && <button className="restart-mini" type="button" onClick={resetDemo}>처음부터</button>}
-            </div>
-            <div className="progress-track" aria-hidden="true"><span style={{ width: `${progress}%` }} /></div>
-
             {step === 'input' && (
-              <div className="panel-body combined-screen screen-enter">
-                <p className="step-label">STEP 01 · 목적지 + 상태 통합 입력</p>
-                <h2>어디로, 어떤 상태로<br />이동하시나요?</h2>
-                <label className="destination-field combined-field">
-                  <span className="field-pin">●</span>
-                  <span className="field-content"><small>목적지</small><input value={destination} onChange={(event) => setDestination(event.target.value)} placeholder="목적지를 입력해주세요" /></span>
-                  {destination && <button type="button" onClick={() => setDestination('')} aria-label="목적지 지우기">×</button>}
-                </label>
-                <div className="quick-destinations combined-quick">{destinations.map((item) => <button type="button" key={item} onClick={() => setDestination(item)}>{item}</button>)}</div>
-
-                <div className="combined-divider"><span>그리고</span></div>
-                <div className="status-title"><div><strong>지금 내 상태</strong><small>한 가지만 선택해도 충분해요</small></div>{condition && <span>선택 완료 ✓</span>}</div>
-                <div className="condition-grid combined-grid">
-                  {conditions.map((item) => {
-                    const active = selected === item.id;
-                    return (
-                      <button key={item.id} className={`condition-card compact ${item.id === 'barrierFree' ? 'wide' : ''} ${active ? 'selected' : ''}`} onClick={() => setSelected(item.id)} aria-pressed={active} type="button">
-                        <span className={`condition-mark ${item.tone}`}>{item.mark}</span>
-                        <span className="condition-text"><strong>{item.label}</strong><small>{item.detail}</small></span><span className="check">✓</span>
-                      </button>
-                    );
-                  })}
+              <div className="prototype-app-screen home-prototype screen-enter">
+                <div className="prototype-search-panel">
+                  <div className="prototype-search-row"><span>⌕</span><strong>검색</strong><button type="button" aria-label="프로필">P</button></div>
+                  <div className="prototype-destination-row"><span>●</span><input value={destination} onChange={(event) => setDestination(event.target.value)} placeholder="어디로 가시나요?" /><button type="button" onClick={() => setDestination('집')}>집</button><button type="button" onClick={() => setDestination('회사')}>회사</button></div>
+                  <div className="prototype-quick-row">{destinations.map((item) => <button type="button" key={item} onClick={() => setDestination(item)}>{item}</button>)}</div>
                 </div>
-                <div className="mock-context-line"><span>예시 환경</span><b>비 30%</b><b>혼잡 보통</b><b>교통 정상</b></div>
-                <button className="primary-button" disabled={!selected || !destination.trim()} type="button" onClick={startMatching}>{selected && destination.trim() ? '한 가지 최적 경로 찾기' : '목적지와 상태를 모두 선택해주세요'}<span>→</span></button>
-                <p className="privacy-note">실시간 API가 아닌 포트폴리오용 예시 데이터로 동작해요.</p>
+                <PrototypeRouteMap variant="home" destination={displayDestination || '목적지'} />
+                <button className="map-locate-button" type="button" aria-label="현재 위치">➤</button>
+                <div className="prototype-bottom-sheet input-sheet">
+                  <span className="sheet-grabber" />
+                  <div className="sheet-heading"><div><small>COMBINED INPUT</small><strong>지금 어떤 이동이 필요하세요?</strong></div>{condition && <span>선택 완료 ✓</span>}</div>
+                  <div className="status-icon-row">
+                    {prototypeConditionOrder.map((id) => {
+                      const active = selected === id;
+                      const meta = prototypeConditionMeta[id];
+                      return <button key={id} type="button" className={active ? 'selected' : ''} onClick={() => setSelected(id)} aria-pressed={active}><span>{meta.icon}</span><small>{meta.label}</small></button>;
+                    })}
+                  </div>
+                  <button className="prototype-cta" disabled={!selected || !destination.trim()} type="button" onClick={startMatching}>{selected && destination.trim() ? '지금 추천 경로 보기' : '목적지와 상태를 선택해주세요'}<span>→</span></button>
+                  <p className="prototype-data-note">예시 데이터로 동작하는 포트폴리오 프로토타입</p>
+                </div>
               </div>
             )}
 
             {step === 'matching' && scenario && (
-              <div className="panel-body matching-screen screen-enter" role="status" aria-live="polite">
+              <div className="panel-body matching-screen matching-prototype screen-enter" role="status" aria-live="polite">
+                <div className="prototype-top-nav"><button type="button" onClick={() => setStep('input')}>←</button><strong>PickGo</strong><span>02 / 05</span></div>
                 <div className="logic-orbit"><span>P</span><i /><i /><i /></div>
                 <p className="step-label">STEP 02 · PICKGO LOGIC ENGINE</p>
                 <h2>{condition?.label.replace('요', '')} 상태에 맞춰<br />경로 가중치를 계산해요.</h2>
@@ -150,46 +147,50 @@ export default function Home() {
             )}
 
             {step === 'route' && scenario && (
-              <div className="panel-body route-screen screen-enter">
-                <div className="route-topline"><button className="back-button" type="button" onClick={() => setStep('input')}>← 입력 수정</button><span className="live-badge"><i /> EXAMPLE DATA</span></div>
-                <p className="step-label">STEP 03 · 지금 추천 경로 1개</p>
-                <div className="choice-heading"><div><h2>{displayDestination}</h2><p>{scenario.destinationDetail}</p></div><div className="fit-score"><strong>{scenario.fit}</strong><small>% 적합</small></div></div>
-                <div className="route-summary"><div><strong>{scenario.minutes}<small>분</small></strong><span>예상 시간</span></div><i /><div><strong>{scenario.walk}</strong><span>총 도보</span></div><i /><div><strong>{scenario.cost}</strong><span>예상 비용</span></div></div>
-                <div className="reason-card"><span className="reason-icon">P</span><div><strong>{scenario.routeLabel}</strong><p>{scenario.reason}</p></div></div>
-                <div className="transport-match">
-                  <div className="transport-copy"><small>추천 이동수단</small><strong>{transportMode}</strong><span>{scenario.transport.note}</span></div>
-                  <div className="transport-options"><button type="button" onClick={() => setTransportMode(scenario.transport.recommended)} className={transportMode === scenario.transport.recommended ? 'selected' : ''}>{scenario.transport.recommended}</button>{scenario.transport.alternatives.map((item) => <button type="button" key={item} onClick={() => setTransportMode(item)} className={transportMode === item ? 'selected' : ''}>{item}</button>)}</div>
-                </div>
-                <div className="context-row">{scenario.context.map((item) => <span key={item}>✓ {item}</span>)}</div>
-                <ol className="route-steps">{scenario.steps.map((item, index) => <li key={item.label}><span className="step-mode">{item.mode}</span><div><small className="phase-label">{item.phase}</small><strong>{item.label}</strong><small>{item.detail}</small></div>{index < scenario.steps.length - 1 && <i />}</li>)}</ol>
-                <button className="primary-button" type="button" onClick={startGuide}>GO · 행동 안내 시작 <span>→</span></button>
+              <div className="prototype-app-screen route-prototype screen-enter">
+                <div className="prototype-top-nav"><button type="button" onClick={() => setStep('input')}>←</button><strong>PickGo’s Choice</strong><button type="button" onClick={resetDemo}>↻</button></div>
+                <div className="match-heading"><p><strong>{condition?.label}</strong> 상태와</p><h2><em>{scenario.fit}%</em> 일치하는 경로입니다</h2><div className="match-progress"><span style={{ width: `${scenario.fit}%` }} /></div></div>
+                <article className="matched-route-card">
+                  <div className="route-card-title"><span>P</span><div><strong>{displayDestination}</strong><small>Route Card · 1-Path Matched</small></div><b>{scenario.minutes}분</b></div>
+                  <PrototypeRouteMap variant="route" destination={displayDestination} />
+                  <div className="route-transit-row"><span>🚇 {scenario.transport.recommended}</span><span>🚕 택시 약 {Math.max(8, scenario.minutes - 4)}분</span></div>
+                  <div className="matched-reason"><small>MATCHED REASON DATA</small><div>{scenario.context.map((item) => <span key={item}>✓ {item}</span>)}</div></div>
+                </article>
+                <div className="route-infographic-row"><div><strong>{scenario.walk}</strong><small>총 도보</small></div><i /><div><strong>{scenario.cost}</strong><small>예상 비용</small></div><i /><div><strong>{scenario.congestion.level}</strong><small>혼잡 예상</small></div></div>
+                <div className="route-reason-copy"><span>P</span><p><strong>{scenario.routeLabel}</strong>{scenario.reason}</p></div>
+                <div className="prototype-sticky-action"><button className="prototype-cta" type="button" onClick={startGuide}>GO · 안내 시작 <span>→</span></button><small>{scenario.minutes}분 뒤 도착 예정 · 예시 데이터</small></div>
               </div>
             )}
 
             {step === 'guide' && scenario && (
-              <div className={`guide-screen screen-enter ${selected === 'urgent' ? 'urgent-guide' : ''}`}>
-                <div className="guide-map">
-                  <div className="guide-route-line"><i /><span /><b /></div>
-                  <span className="map-place place-one">서울역</span><span className="map-place place-two">{displayDestination}</span>
-                  <div className="live-float"><i /> ACTIVE GUARD · DEMO</div>
-                  {incident && <div className="incident-float"><strong>!</strong><div><b>앞 구간 지연 감지</b><span>더 안정적인 이동수단을 찾았어요.</span></div></div>}
+              <div className={`prototype-app-screen guard-prototype screen-enter ${incident ? 'incident-open' : ''}`}>
+                <div className="guard-map-wrap">
+                  <PrototypeRouteMap variant="guide" destination={displayDestination} />
+                  <div className="guard-search-bar"><span>⌕</span><strong>{displayDestination}</strong><button type="button" onClick={resetDemo}>×</button></div>
+                  <div className="active-guard-pill"><i /> ACTIVE GUARD · {Math.max(1, scenario.minutes - guideIndex * Math.ceil(scenario.minutes / 3))}분 남음</div>
                 </div>
-                <div className="guide-sheet">
-                  <div className="guide-meta"><span>STEP 04 · 지금 해야 할 일</span><strong>{Math.max(1, scenario.minutes - guideIndex * Math.ceil(scenario.minutes / 3))}분 남음</strong></div>
+
+                {!incident && <div className="prototype-bottom-sheet guard-sheet">
+                  <span className="sheet-grabber" />
+                  <div className="guide-meta"><span>지금 해야 할 일</span><strong>STEP {guideIndex + 1} / {scenario.steps.length}</strong></div>
                   <div className="journey-phases">{scenario.steps.map((item, index) => <div key={item.phase} className={index === guideIndex ? 'active' : index < guideIndex ? 'done' : ''}><span>{index < guideIndex ? '✓' : index + 1}</span><small>{item.phase}</small></div>)}</div>
                   <div className="next-action"><span className="turn-arrow">{guideIndex === scenario.steps.length - 1 ? '↓' : guideIndex === 1 ? '↑' : '↱'}</span><div><strong>{scenario.steps[guideIndex].label}</strong><p>{scenario.steps[guideIndex].detail}</p></div></div>
-                  <div className="guide-progress"><span style={{ width: `${((guideIndex + 1) / scenario.steps.length) * 100}%` }} /></div>
-                  <div className="live-context"><span><i /> ETA 예시 업데이트</span><span>혼잡 {congestionReport || scenario.congestion.level}</span></div>
+                  <div className="guide-context-row"><span>ETA 예시 업데이트</span><span>혼잡 {congestionReport || scenario.congestion.level}</span></div>
+                  {selected === 'urgent' ? <button className={`sos-compact ${shared ? 'shared' : ''}`} type="button" onClick={() => setShared(!shared)}><b>{shared ? '✓' : 'SOS'}</b><span>{shared ? '위치 공유 데모 ON' : '보호자 위치 공유 데모'}</span></button> : <div className="compact-report"><button type="button" onClick={() => setShowReport(!showReport)}>혼잡도 제보 <b>{congestionReport || '선택'}</b></button>{showReport && <div>{['여유', '보통', '혼잡'].map((level) => <button key={level} type="button" onClick={() => { setCongestionReport(level); setShowReport(false); }}>{level}</button>)}</div>}</div>}
+                  <div className="guide-action-grid"><button type="button" onClick={() => setIncident(true)}>⚠ 돌발상황 체험</button><button type="button" onClick={advanceGuide}>{guideIndex === scenario.steps.length - 1 ? '도착 완료' : '다음 단계'} →</button></div>
+                </div>}
 
-                  {selected === 'urgent' && <button className={`sos-button ${shared ? 'shared' : ''}`} type="button" onClick={() => setShared(!shared)}><span>{shared ? '✓' : 'SOS'}</span><div><strong>{shared ? '위치 공유 데모가 켜졌어요' : '보호자 위치 공유 데모'}</strong><small>실제 위치는 전송되지 않아요</small></div></button>}
-
-                  {selected !== 'urgent' && <div className="crowd-report-wrap"><button className="crowd-report-trigger" type="button" onClick={() => setShowReport(!showReport)}><span className="crowd-symbol"><i /><i /><i /></span><div><strong>{congestionReport ? `혼잡도 ‘${congestionReport}’ 제보 완료` : '지금 혼잡도를 알려주세요'}</strong><small>다음 이동자를 돕는 원탭 제보 · 데모</small></div><b>{showReport ? '닫기' : '제보'}</b></button>{showReport && <div className="crowd-options">{['여유', '보통', '혼잡'].map((level) => <button key={level} type="button" onClick={() => { setCongestionReport(level); setShowReport(false); }}>{level}</button>)}</div>}</div>}
-
-                  {!incident && guideIndex === 1 && <button className="secondary-button" type="button" onClick={() => setIncident(true)}>실시간 변수 대응 체험 <span>↗</span></button>}
-                  {incident && <button className="reroute-button" type="button" onClick={() => { setIncident(false); setTransportMode(scenario.transport.alternatives.at(-1) || scenario.transport.recommended); }}><span>↗</span><div><strong>{scenario.transport.alternatives.at(-1)}로 스마트 스위칭</strong><small>예상 지연 7분을 피하는 예시 제안</small></div><b>변경</b></button>}
-                  <button className="primary-button finish-button" type="button" onClick={advanceGuide}>{guideIndex === scenario.steps.length - 1 ? '도착 완료' : `다음 · ${scenario.steps[guideIndex + 1].phase}`} <span>→</span></button>
-                  <button className="text-button" type="button" onClick={resetDemo}>안내 종료</button>
-                </div>
+                {incident && <>
+                  <div className="guard-dim" />
+                  <div className="system-alert-modal"><span>!</span><strong>System Alert</strong><p>전방 구간에 지연이 감지됐어요.<br />대안 경로로 변경하시겠어요?</p></div>
+                  <div className="alternative-sheet">
+                    <span className="sheet-grabber" />
+                    <small>ALTERNATIVE OPTION · SMART SWITCH</small>
+                    <PrototypeRouteMap variant="alternative" destination={displayDestination} />
+                    <div className="alternative-copy"><b>[대안 제안]</b><strong>{scenario.transport.alternatives.at(-1)} 경로 추천</strong><p>예상 도착 7분 단축 · 계단 이용 0개</p></div>
+                    <div className="alternative-actions"><button type="button" onClick={() => setIncident(false)}>원래대로 진행</button><button type="button" onClick={() => { setIncident(false); setTransportMode(scenario.transport.alternatives.at(-1) || scenario.transport.recommended); }}>대안 경로로 변경</button></div>
+                  </div>
+                </>}
               </div>
             )}
 
@@ -244,6 +245,18 @@ export default function Home() {
       <section className="research-strip"><div><span>PICKGO PRINCIPLE</span><blockquote>목적지는 하나,<br />오늘의 최적 경로도 하나.</blockquote><p>모든 데이터와 추천은 포트폴리오용 Mock Data입니다.</p></div><button type="button" onClick={resetDemo}>PickGo 다시 체험하기 <span>↗</span></button></section>
       <footer className="site-footer"><div className="brand"><span className="brand-dot">P</span><span>PickGo</span></div><p>당신의 컨디션에 딱 맞는, 단 하나의 확신 경로.</p><span>UX PORTFOLIO · 2026</span></footer>
     </main>
+  );
+}
+
+function PrototypeRouteMap({ variant, destination }: { variant: 'home' | 'route' | 'guide' | 'alternative'; destination: string }) {
+  return (
+    <div className={`coded-route-map map-${variant}`} aria-label={`${destination} 예시 경로 지도`}>
+      <span className="coded-road road-one" /><span className="coded-road road-two" /><span className="coded-road road-three" /><span className="coded-road road-four" /><span className="coded-road road-five" />
+      <span className="coded-block block-one" /><span className="coded-block block-two" /><span className="coded-block block-three" /><span className="coded-block block-four" />
+      <span className="coded-route route-one" /><span className="coded-route route-two" /><span className="coded-route route-three" />
+      <i className="route-origin" /><i className="route-stop" /><i className="route-destination" />
+      <small className="coded-map-label">{destination}</small>
+    </div>
   );
 }
 
