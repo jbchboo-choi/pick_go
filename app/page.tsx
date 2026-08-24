@@ -307,7 +307,7 @@ function ContinuousRouteLine({ variant }: { variant: 'home' | 'route' | 'guide' 
       context.lineWidth = Math.max(9, Math.min(13, width / 32));
       context.stroke();
       trace();
-      context.strokeStyle = variant === 'alternative' ? '#2585c4' : '#168a5b';
+      context.strokeStyle = variant === 'alternative' ? '#3384ff' : '#0064ff';
       context.lineWidth = Math.max(5, Math.min(7, width / 60));
       context.stroke();
     };
