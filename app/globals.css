@@ -193,7 +193,6 @@ button { color:inherit; }
   z-index:-1;
   inset:0 auto 0 50%;
   transform:translateX(-50%);
-  border-bottom:1px solid var(--surface-blue-deep);
   background:linear-gradient(180deg,#e8f3ff 0%,var(--surface-blue) 52%,#fbfdff 100%);
 }
 .hero h1,.system-flow-head h2,.story-intro h2,.reference-head h2 { font-weight:700; letter-spacing:-.055em; }
@@ -395,7 +394,7 @@ svg.lucide { width:24px; height:24px; flex:0 0 24px; display:block; stroke-width
   margin:0 0 20px;
   padding:100px max(52px,calc((100vw - 1248px) / 2 + 52px)) 48px;
   border-radius:0;
-  box-shadow:inset 0 1px 0 #d3e8ff,inset 0 -1px 0 #d3e8ff;
+  box-shadow:none;
 }
 @media (max-width:900px) {
   .system-flow-section { margin:0 0 20px; padding:70px 38px 48px; border-radius:0; }
