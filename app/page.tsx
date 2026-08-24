@@ -5,6 +5,12 @@ import { ConditionId, conditions, destinations, scenarios } from './mock-data';
 
 type Step = 'input' | 'matching' | 'route' | 'guide' | 'arrival';
 
+const showcaseScreens = [
+  { id: 'home', code: 'HM–002', title: 'Combined Input', korean: '목적지와 상태 통합 입력', description: '목적지와 지금의 상태를 한 화면에서 받고 중간 설정 단계를 없앴어요.', className: 'screen-home' },
+  { id: 'route', code: 'PA–001', title: "PickGo's Choice", korean: '단일 경로 추천 카드', description: '여러 선택지를 나열하지 않고 추천 이유가 명확한 경로 하나만 보여줘요.', className: 'screen-route' },
+  { id: 'reroute', code: 'DR–002', title: 'Active Guard', korean: '스마트 리라우팅', description: '돌발 변수를 감지하면 재검색 없이 더 안전한 이동수단과 경로를 제안해요.', className: 'screen-reroute' },
+];
+
 export default function Home() {
   const [step, setStep] = useState<Step>('input');
   const [selected, setSelected] = useState<ConditionId | ''>('');
@@ -15,6 +21,7 @@ export default function Home() {
   const [showReport, setShowReport] = useState(false);
   const [congestionReport, setCongestionReport] = useState('');
   const [transportMode, setTransportMode] = useState('');
+  const [showcaseIndex, setShowcaseIndex] = useState(0);
 
   const condition = conditions.find((item) => item.id === selected);
   const scenario = selected ? scenarios[selected] : null;
@@ -212,6 +219,40 @@ export default function Home() {
           <FlowCard no="05" title="도착 완료" subtitle="Arrival" items={['최종 출구 안내', '절약 가치 리포트']} accent="green" />
         </div>
         <div className="key-logic-bar"><div><span>KEY 01</span><strong>목적지+상태 동시 입력</strong><small>중간 비교 화면 생략</small></div><i /><div><span>KEY 02</span><strong>배리어프리 우선순위</strong><small>비·짐·통증에 따라 가중치 변경</small></div><i /><div><span>KEY 03</span><strong>스마트 리라우팅</strong><small>돌발 상황에 이동수단까지 재매칭</small></div></div>
+      </section>
+
+      <section className="screen-showcase" aria-labelledby="screen-showcase-title">
+        <div className="showcase-head">
+          <div><p className="eyebrow">KEY PRODUCT SCREENS</p><h2 id="screen-showcase-title">핵심 순간을<br />화면으로 확인해보세요.</h2></div>
+          <p>통합 입력부터 단일 경로 추천, 돌발 상황의 스마트 리라우팅까지 PickGo의 주요 화면 흐름입니다.</p>
+        </div>
+        <div className="prototype-tabs" role="tablist" aria-label="PickGo 핵심 화면 선택">
+          {showcaseScreens.map((item, index) => <button key={item.id} role="tab" aria-selected={showcaseIndex === index} type="button" className={showcaseIndex === index ? 'active' : ''} onClick={() => setShowcaseIndex(index)}><span>0{index + 1}</span>{item.korean}</button>)}
+        </div>
+        <div className="prototype-stage">
+          <div className="prototype-copy" aria-live="polite">
+            <span>{showcaseScreens[showcaseIndex].code} · SCREEN 0{showcaseIndex + 1}</span>
+            <h3>{showcaseScreens[showcaseIndex].title}</h3>
+            <strong>{showcaseScreens[showcaseIndex].korean}</strong>
+            <p>{showcaseScreens[showcaseIndex].description}</p>
+            <div className="prototype-progress"><i style={{ width: `${((showcaseIndex + 1) / showcaseScreens.length) * 100}%` }} /></div>
+            <small>이미지를 누르면 다음 화면으로 넘어가요.</small>
+          </div>
+          <div className="mobile-prototype-wrap">
+            <button className="prototype-arrow prev" type="button" aria-label="이전 화면" onClick={() => setShowcaseIndex((current) => (current - 1 + showcaseScreens.length) % showcaseScreens.length)}>←</button>
+            <button className="mobile-prototype" type="button" aria-label={`${showcaseScreens[showcaseIndex].korean}, 눌러서 다음 화면 보기`} onClick={() => setShowcaseIndex((current) => (current + 1) % showcaseScreens.length)}>
+              <span className="phone-speaker" />
+              <span className={`screen-image ${showcaseScreens[showcaseIndex].className}`} role="img" aria-label={showcaseScreens[showcaseIndex].korean} />
+              <span className="phone-homebar" />
+            </button>
+            <button className="prototype-arrow next" type="button" aria-label="다음 화면" onClick={() => setShowcaseIndex((current) => (current + 1) % showcaseScreens.length)}>→</button>
+          </div>
+          <div className="prototype-mobile-nav">
+            <button type="button" onClick={() => setShowcaseIndex((current) => (current - 1 + showcaseScreens.length) % showcaseScreens.length)}>← 이전</button>
+            <span>{showcaseIndex + 1} / {showcaseScreens.length}</span>
+            <button type="button" onClick={() => setShowcaseIndex((current) => (current + 1) % showcaseScreens.length)}>다음 →</button>
+          </div>
+        </div>
       </section>
 
       <section className="story-section" id="story">
