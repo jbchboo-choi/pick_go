@@ -525,4 +525,71 @@ svg.lucide { width:24px; height:24px; flex:0 0 24px; display:block; stroke-width
   .screen-capture-label { width:min(100%,350px); min-height:0; }
   .capture-device { height:650px; }
 }
+
+/* WHY PICKGO — research evidence */
+.research-evidence-section { max-width:1248px; margin:20px auto 0; padding:110px 66px; border-radius:var(--radius-card); background:#fff; }
+.research-evidence-head { max-width:790px; }
+.research-evidence-head .eyebrow { margin-bottom:18px; color:var(--primary); }
+.research-evidence-head h2 { margin:0; font-size:clamp(36px,3vw,44px); font-weight:700; line-height:1.12; letter-spacing:-.055em; word-break:keep-all; }
+.research-evidence-head>p:last-child { max-width:650px; margin:23px 0 0; color:var(--body); font-size:14px; line-height:1.75; word-break:keep-all; }
+.research-preference-card { margin-top:52px; padding:32px; display:grid; grid-template-columns:1.12fr 1fr .7fr .64fr; align-items:center; gap:32px; border:1px solid #d7e6fb; border-radius:var(--radius-card); background:linear-gradient(135deg,#f5f9ff 0%,#fff 72%); }
+.preference-score { min-width:0; display:flex; align-items:center; gap:21px; }
+.preference-ring { width:118px; height:118px; flex:none; display:grid; place-items:center; position:relative; border-radius:50%; background:conic-gradient(var(--primary) 0 84%,#dce9f9 84% 100%); }
+.preference-ring::before { content:''; position:absolute; inset:12px; border-radius:50%; background:#fff; }
+.preference-ring span { position:relative; z-index:1; display:flex; align-items:baseline; flex-direction:column; text-align:center; }
+.preference-ring strong { color:var(--primary); font-size:36px; line-height:.95; letter-spacing:-.07em; }
+.preference-ring small { margin-top:4px; color:var(--muted-alt); font-size:9px; }
+.preference-score>div:last-child { min-width:0; }
+.preference-score>div:last-child>small { color:var(--primary); font-size:7px; font-weight:850; letter-spacing:.08em; }
+.preference-score h3 { margin:6px 0 8px; font-size:17px; letter-spacing:-.04em; }
+.preference-score p { margin:0; color:var(--muted); font-size:10px; line-height:1.55; }
+.preference-comparison { display:flex; flex-direction:column; gap:18px; }
+.preference-comparison>div>span { margin-bottom:7px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.preference-comparison b { color:var(--muted); font-size:9px; font-weight:650; }
+.preference-comparison em { color:var(--neutral); font-size:9px; font-style:normal; font-weight:800; }
+.preference-comparison>div>i { height:8px; display:block; overflow:hidden; border-radius:10px; background:#e2e7ed; }
+.preference-comparison u { height:100%; display:block; border-radius:inherit; background:var(--neutral); text-decoration:none; }
+.preference-comparison .highlight b,.preference-comparison .highlight em { color:var(--primary); }
+.preference-comparison .highlight u { background:var(--primary); }
+.preference-distribution { height:118px; padding-top:10px; display:flex; align-items:flex-end; justify-content:center; gap:12px; border-left:1px solid var(--line); }
+.preference-distribution>span { height:100%; display:flex; align-items:center; flex-direction:column; justify-content:flex-end; }
+.preference-distribution i { width:24px; min-height:18px; display:block; border-radius:5px 5px 2px 2px; background:linear-gradient(180deg,#68a3ff,var(--primary)); }
+.preference-distribution b { margin-top:6px; color:var(--body); font-size:8px; }
+.preference-distribution small { color:var(--muted-alt); font-size:7px; }
+.research-key-stat { min-height:118px; padding-left:22px; display:flex; flex-direction:column; justify-content:center; border-left:1px solid var(--line); }
+.research-key-stat strong { color:var(--orange); font-size:40px; line-height:1; letter-spacing:-.06em; }
+.research-key-stat span { margin-top:8px; color:var(--muted); font-size:9px; line-height:1.45; }
+.research-key-stat b { color:var(--ink); }
+.research-voices { margin-top:28px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.research-voice-card { min-width:0; overflow:hidden; position:relative; border:1px solid var(--line); border-radius:var(--radius-card); background:#f6f8fb; }
+.research-person-photo { height:275px; background-image:linear-gradient(180deg,transparent 55%,rgba(11,26,45,.36)),url('/research-participants.png'); background-repeat:no-repeat; background-size:300% 100%; }
+.research-person-photo.person-one { background-position:0 center; }
+.research-person-photo.person-two { background-position:50% center; }
+.research-person-photo.person-three { background-position:100% center; }
+.research-voice-card blockquote { min-height:180px; margin:-34px 14px 14px; padding:23px 21px 20px; position:relative; z-index:2; border-radius:17px; background:#fff; box-shadow:0 14px 30px rgba(25,48,79,.13); }
+.research-voice-card blockquote::before { content:''; width:20px; height:20px; position:absolute; left:28px; top:-8px; border-radius:3px; background:#fff; transform:rotate(45deg); }
+.research-voice-card blockquote>svg { position:relative; z-index:1; color:var(--primary); }
+.research-voice-card blockquote p { margin:13px 0 20px; position:relative; z-index:1; color:var(--body); font-size:13px; line-height:1.65; letter-spacing:-.025em; word-break:keep-all; }
+.research-voice-card blockquote p strong { color:var(--ink); font-weight:760; }
+.research-voice-card blockquote footer { display:flex; flex-direction:column; gap:3px; }
+.research-voice-card blockquote footer b { color:var(--primary); font-size:9px; }
+.research-voice-card blockquote footer span { color:var(--muted-alt); font-size:8px; }
+.research-source-note { margin:18px 0 0; color:#87909a; font-size:8px; letter-spacing:.03em; text-align:right; }
+
+@media (max-width:1050px) {
+  .research-preference-card { grid-template-columns:1fr 1fr; }
+  .preference-distribution { border-left:0; border-top:1px solid var(--line); }
+  .research-key-stat { border-top:1px solid var(--line); border-left:0; }
+}
+@media (max-width:780px) {
+  .research-evidence-section { margin-inline:12px; padding:72px 22px; }
+  .research-evidence-head h2 { font-size:32px; }
+  .research-preference-card { padding:24px 20px; grid-template-columns:1fr; gap:28px; }
+  .preference-score { align-items:flex-start; flex-direction:column; }
+  .preference-distribution { padding-top:22px; }
+  .research-key-stat { min-height:96px; padding:22px 0 0; }
+  .research-voices { grid-template-columns:1fr; gap:20px; }
+  .research-person-photo { height:330px; }
+  .research-source-note { line-height:1.5; text-align:left; }
+}
 @media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto!important; transition:none!important; animation:none!important; } }

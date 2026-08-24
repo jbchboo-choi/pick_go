@@ -5,7 +5,7 @@ import Image from 'next/image';
 import {
   Accessibility, ArrowDown, ArrowDownRight, ArrowLeft, ArrowRight, ArrowUp, ArrowUpRight,
   BatteryFull, Briefcase, CarTaxiFront, Check, Circle, CircleCheckBig, Clock, CornerUpRight,
-  LoaderCircle, LocateFixed, MapPin, Moon, RotateCcw, Search, Signal, TrainFront,
+  LoaderCircle, LocateFixed, MapPin, Moon, Quote, RotateCcw, Search, Signal, TrainFront,
   TriangleAlert, UserRound, Wifi, X, Zap, type LucideIcon,
 } from 'lucide-react';
 import { ConditionId, conditions, destinations, scenarios } from './mock-data';
@@ -335,6 +335,47 @@ export default function Home() {
           <article><span>02</span><h3>Dynamic Weighting</h3><p>급함, 피로, 짐, 이동 불편에 따라 경로의 우선순위를 다르게 계산합니다.</p></article>
           <article><span>03</span><h3>Active Guard</h3><p>이동 중 변수에는 재검색 대신 이동수단 전환과 우회 경로를 제안합니다.</p></article>
         </div>
+      </section>
+
+      <section className="research-evidence-section" aria-labelledby="research-evidence-title">
+        <div className="research-evidence-head">
+          <p className="eyebrow">USER RESEARCH · 10 PARTICIPANTS</p>
+          <h2 id="research-evidence-title">사용자는 더 많은 경로보다,<br />믿고 갈 하나의 경로를 원했습니다.</h2>
+          <p>2026년 4월 출퇴근자와 지도 앱 사용자 10명을 대상으로 이동 중 불편과 단일 경로 제안에 대한 선호를 확인했습니다.</p>
+        </div>
+
+        <div className="research-preference-card">
+          <div className="preference-score">
+            <div className="preference-ring" aria-label="단일 경로 선호도 5점 만점에 4.2점"><span><strong>4.2</strong><small>/ 5.0</small></span></div>
+            <div><small>SINGLE PATH PREFERENCE</small><h3>단일 경로 제안 선호도</h3><p>응답자의 80%가 4점 이상으로 평가했습니다.</p></div>
+          </div>
+          <div className="preference-comparison" aria-label="사용자 조사 결과 비교">
+            <div><span><b>기존 앱의 변수 대응 만족도</b><em>3.4 / 5</em></span><i><u style={{ width: '68%' }} /></i></div>
+            <div className="highlight"><span><b>PickGo 단일 경로 선호도</b><em>4.2 / 5</em></span><i><u style={{ width: '84%' }} /></i></div>
+          </div>
+          <div className="preference-distribution">
+            <span><i style={{ height: '40%' }} /><b>5점</b><small>40%</small></span>
+            <span><i style={{ height: '40%' }} /><b>4점</b><small>40%</small></span>
+            <span><i style={{ height: '20%' }} /><b>3점</b><small>20%</small></span>
+          </div>
+          <div className="research-key-stat"><strong>80%</strong><span>패닉 상황에서<br /><b>도움 모드가 매우 필요</b></span></div>
+        </div>
+
+        <div className="research-voices">
+          <article className="research-voice-card">
+            <div className="research-person-photo person-one" role="img" aria-label="캐리어를 든 출퇴근 사용자 이미지" />
+            <blockquote><Quote aria-hidden="true" /><p>“짐이 많을 때는 최단 시간보다<br /><strong>계단이 없고 덜 걷는 경로</strong>가 필요해요.”</p><footer><b>익명 응답자 05</b><span>출퇴근 지도 앱 사용자</span></footer></blockquote>
+          </article>
+          <article className="research-voice-card">
+            <div className="research-person-photo person-two" role="img" aria-label="이동 중인 직장인 사용자 이미지" />
+            <blockquote><Quote aria-hidden="true" /><p>“시간에 쫓길 때 여러 경로를 비교하면<br /><strong>무엇이 최선인지 더 막막해져요.</strong>”</p><footer><b>익명 응답자 01</b><span>외근이 잦은 직장인</span></footer></blockquote>
+          </article>
+          <article className="research-voice-card">
+            <div className="research-person-photo person-three" role="img" aria-label="버스 앞에서 휴대폰을 확인하는 사용자 이미지" />
+            <blockquote><Quote aria-hidden="true" /><p>“갑작스러운 지연이나 공사까지<br /><strong>빠르게 반영되는 안내</strong>가 필요해요.”</p><footer><b>익명 응답자 10</b><span>대중교통 중심 이용자</span></footer></blockquote>
+          </article>
+        </div>
+        <p className="research-source-note">SOURCE · PickGo 사용자 인터뷰, 2026.04.03–04.05 · n=10 · 인물 이미지는 익명성을 위해 연출된 이미지입니다.</p>
       </section>
 
       <section className="reference-section">
