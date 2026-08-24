@@ -313,6 +313,8 @@ export default function Home() {
         </div>
       </section>
 
+      <ScreenGallery />
+
       <section className="system-flow-section" id="flow">
         <div className="system-flow-head"><p className="eyebrow">PICKGO USER FLOW</p><h2>입력부터 도착까지,<br />판단은 줄이고 대응은 빠르게.</h2><p>첨부 플로우의 핵심 원리를 포트폴리오 데모에 맞춰 실제 인터랙션으로 단순화했습니다.</p></div>
         <div className="system-flow-grid">
@@ -347,6 +349,84 @@ export default function Home() {
       <section className="research-strip"><div><span>PICKGO PRINCIPLE</span><blockquote>목적지는 하나,<br />오늘의 최적 경로도 하나.</blockquote><p>모든 데이터와 추천은 포트폴리오용 Mock Data입니다.</p></div><button type="button" onClick={resetDemo}>PickGo 다시 체험하기 <span><ArrowUpRight aria-hidden="true" size={24} strokeWidth={2} /></span></button></section>
       <footer className="site-footer"><div className="brand"><PickGoLogo /></div><p>당신의 컨디션에 딱 맞는, 단 하나의 확신 경로.</p><span>UX PORTFOLIO · 2026</span></footer>
     </main>
+  );
+}
+
+function ScreenGallery() {
+  return (
+    <section className="screen-gallery-section" aria-labelledby="screen-gallery-title">
+      <div className="screen-gallery-head">
+        <p className="eyebrow">PICKGO SCREEN OVERVIEW</p>
+        <h2 id="screen-gallery-title">한 번의 입력부터 이동 중 대응까지.</h2>
+        <p>인터랙티브 프로토타입의 핵심 장면을 실제 앱 화면처럼 한눈에 비교할 수 있도록 정리했습니다.</p>
+      </div>
+
+      <div className="screen-gallery-grid">
+        <article className="screen-capture-card">
+          <div className="screen-capture-label"><span>[HM–002]</span><strong>Main Home · Combined Input</strong></div>
+          <div className="capture-device">
+            <div className="capture-statusbar"><strong>9:41</strong><span><Signal aria-hidden="true" /><Wifi aria-hidden="true" /><BatteryFull aria-hidden="true" /></span></div>
+            <div className="capture-search">
+              <div><Search aria-hidden="true" /><span>검색</span><UserRound aria-hidden="true" /></div>
+              <div><MapPin aria-hidden="true" /><span>강남역</span><b>집</b><b>회사</b></div>
+            </div>
+            <div className="capture-quick"><span>시청역</span><span>홍대입구역</span><span>강남역</span></div>
+            <div className="capture-map-home"><PrototypeRouteMap variant="home" destination="강남역" /></div>
+            <div className="capture-sheet capture-input-sheet">
+              <i />
+              <small>COMBINED INPUT</small>
+              <h3>지금 어떤 이동이 필요하세요?</h3>
+              <div className="capture-condition-row">
+                <span className="urgent"><Zap aria-hidden="true" /><b>급해요</b></span>
+                <span><Moon aria-hidden="true" /><b>피곤해요</b></span>
+                <span className="selected"><Accessibility aria-hidden="true" /><b>배려가 필요해요</b></span>
+                <span className="selected"><Briefcase aria-hidden="true" /><b>짐이 많아요</b></span>
+                <span className="urgent"><Clock aria-hidden="true" /><b>늦으면 안 돼요</b></span>
+              </div>
+              <button type="button">추천 경로 보기 <ArrowRight aria-hidden="true" /></button>
+            </div>
+            <span className="capture-homebar" />
+          </div>
+        </article>
+
+        <article className="screen-capture-card">
+          <div className="screen-capture-label"><span>[PA–001]</span><strong>Single-Path Matched · PickGo’s Choice</strong></div>
+          <div className="capture-device">
+            <div className="capture-statusbar"><strong>9:41</strong><span><Signal aria-hidden="true" /><Wifi aria-hidden="true" /><BatteryFull aria-hidden="true" /></span></div>
+            <div className="capture-choice-head"><small>PICKGO’S CHOICE</small><p><strong>짐이 많아요</strong> 상태와</p><h3><em>98%</em> 일치하는 경로입니다</h3><i><span /></i></div>
+            <article className="capture-route-card">
+              <div><span>P</span><p><strong>강남역</strong><small>Route Card · 1-Path Matched</small></p><b>31분</b></div>
+              <div className="capture-map-route"><PrototypeRouteMap variant="route" destination="강남역" /></div>
+              <p className="capture-transit"><span><TrainFront aria-hidden="true" /> 지하철 4호선 → 2호선</span><b>환승 1회</b></p>
+              <small>MATCHED REASON DATA</small>
+              <div className="capture-reasons"><span><Check aria-hidden="true" /> 엘리베이터 중심</span><span><Check aria-hidden="true" /> 계단 최소</span><span><Check aria-hidden="true" /> 실내 연결</span></div>
+            </article>
+            <div className="capture-metrics"><span><strong>420m</strong><small>총 도보</small></span><span><strong>1,500원</strong><small>예상 비용</small></span><span><strong>보통</strong><small>혼잡 예상</small></span></div>
+            <button className="capture-primary-button" type="button">GO · 안내 시작 <ArrowRight aria-hidden="true" /></button>
+            <span className="capture-homebar" />
+          </div>
+        </article>
+
+        <article className="screen-capture-card">
+          <div className="screen-capture-label"><span>[DR–002]</span><strong>Active Guard · Smart Re-routing</strong></div>
+          <div className="capture-device capture-guard-device">
+            <div className="capture-statusbar"><strong>9:41</strong><span><Signal aria-hidden="true" /><Wifi aria-hidden="true" /><BatteryFull aria-hidden="true" /></span></div>
+            <div className="capture-guard-map"><PrototypeRouteMap variant="guide" destination="강남역" /></div>
+            <div className="capture-guard-search"><Search aria-hidden="true" /><strong>강남역</strong><X aria-hidden="true" /></div>
+            <div className="capture-guard-dim" />
+            <div className="capture-alert"><TriangleAlert aria-hidden="true" /><strong>System Alert</strong><p>전방 구간에 지연이 감지됐어요.<br />대안 경로로 변경하시겠어요?</p></div>
+            <div className="capture-alternative-sheet">
+              <i />
+              <small>ALTERNATIVE OPTION · SMART SWITCH</small>
+              <div className="capture-alt-map"><PrototypeRouteMap variant="alternative" destination="대안 경로" /></div>
+              <p><b>[대안 제안]</b><strong>저상버스 + 택시 경로 추천</strong><span>예상 도착 7분 단축 · 계단 이용 0개</span></p>
+              <div><button type="button">원래대로 진행</button><button type="button">대안 경로로 변경</button></div>
+            </div>
+            <span className="capture-homebar" />
+          </div>
+        </article>
+      </div>
+    </section>
   );
 }
 
