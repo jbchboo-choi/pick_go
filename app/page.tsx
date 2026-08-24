@@ -74,7 +74,7 @@ function HeroRouteGraphic() {
       context.lineTo(p11.x, p11.y);
       context.bezierCurveTo(width * .81, height * .62, width * .84, height * .66, p12.x, p12.y);
       context.lineTo(p13.x, p13.y);
-      context.strokeStyle = 'rgba(255,255,255,.09)';
+      context.strokeStyle = 'rgba(255,255,255,.065)';
       context.lineWidth = 2;
       context.lineCap = 'round';
       context.lineJoin = 'round';
@@ -93,10 +93,10 @@ function HeroRouteGraphic() {
         }
         context.beginPath();
         context.arc(x, y, 5, 0, Math.PI * 2);
-        context.fillStyle = origin ? '#ff8b00' : 'rgba(255,255,255,.09)';
+        context.fillStyle = origin ? '#ff8b00' : 'rgba(255,255,255,.07)';
         context.fill();
         context.lineWidth = 2;
-        context.strokeStyle = origin ? 'rgba(255,139,0,.58)' : 'rgba(255,255,255,.18)';
+        context.strokeStyle = origin ? 'rgba(255,139,0,.58)' : 'rgba(255,255,255,.08)';
         context.stroke();
       };
 
@@ -313,8 +313,6 @@ export default function Home() {
         </div>
       </section>
 
-      <ScreenGallery />
-
       <section className="story-section" id="story">
         <div className="story-lead-grid">
           <div className="story-intro"><p className="eyebrow">WHY PICKGO</p><h2>정보가 많아서가 아니라,<br />결정할 것이 많아서 힘들었습니다.</h2><p>목적지를 입력한 뒤 다시 조건을 고르고, 여러 경로를 비교하는 대신 PickGo는 목적지와 상태를 함께 받아 하나의 행동으로 연결합니다.</p></div>
@@ -383,6 +381,15 @@ export default function Home() {
         <p className="research-source-note">SOURCE · PickGo 사용자 인터뷰 및 타깃 사용자 그룹, 2026.04.03–04.05 · n=10 · 인물과 문구는 익명성 보호를 위해 리서치 기반으로 재구성했습니다.</p>
       </section>
 
+      <section className="reference-section">
+        <div className="reference-head"><div><p className="eyebrow">UX REFERENCE</p><h2>검증된 이동 UX를<br />PickGo의 맥락으로.</h2></div><p>Transit의 행동 안내, Citymapper의 단계별 정보, Moovit의 상황 맞춤 추천 원리를 PickGo의 통합 입력과 동적 가중치에 결합했습니다.</p></div>
+        <div className="reference-grid">
+          <article className="reference-card featured"><div className="reference-no">01 <span>PRIMARY</span></div><h3>Transit</h3><p>사용자가 행동해야 하는 순간에 맞춘 GO 안내와 혼잡도 제보.</p><div className="reference-apply"><small>PICKGO 적용</small><strong>단일 추천 → GO 안내<br />→ 혼잡도 원탭 제보</strong></div></article>
+          <article className="reference-card"><div className="reference-no">02</div><h3>Citymapper</h3><p>걷기·탑승·환승·하차 단계마다 가장 필요한 정보만 제공.</p><div className="reference-apply"><small>PICKGO 적용</small><strong>출발 전 혼잡 → 이동 중 환승<br />→ 도착 전 하차 정보</strong></div></article>
+          <article className="reference-card"><div className="reference-no">03</div><h3>Moovit</h3><p>교통 상황과 사용자 맥락을 함께 고려하는 적합 경로 추천.</p><div className="reference-apply"><small>PICKGO 적용</small><strong>가장 빠른 길보다<br />지금 나에게 적합한 길</strong></div></article>
+        </div>
+      </section>
+
       <section className="system-flow-section" id="flow">
         <div className="system-flow-head"><p className="eyebrow">PICKGO USER FLOW</p><h2>입력부터 도착까지,<br />판단은 줄이고 대응은 빠르게.</h2><p>첨부 플로우의 핵심 원리를 포트폴리오 데모에 맞춰 실제 인터랙션으로 단순화했습니다.</p></div>
         <div className="system-flow-grid">
@@ -395,16 +402,9 @@ export default function Home() {
         <div className="key-logic-bar"><div><span>KEY 01</span><strong>목적지+상태 동시 입력</strong><small>중간 비교 화면 생략</small></div><i /><div><span>KEY 02</span><strong>배리어프리 우선순위</strong><small>비·짐·통증에 따라 가중치 변경</small></div><i /><div><span>KEY 03</span><strong>스마트 리라우팅</strong><small>돌발 상황에 이동수단까지 재매칭</small></div></div>
       </section>
 
-      <section className="reference-section">
-        <div className="reference-head"><div><p className="eyebrow">UX REFERENCE</p><h2>검증된 이동 UX를<br />PickGo의 맥락으로.</h2></div><p>Transit의 행동 안내, Citymapper의 단계별 정보, Moovit의 상황 맞춤 추천 원리를 PickGo의 통합 입력과 동적 가중치에 결합했습니다.</p></div>
-        <div className="reference-grid">
-          <article className="reference-card featured"><div className="reference-no">01 <span>PRIMARY</span></div><h3>Transit</h3><p>사용자가 행동해야 하는 순간에 맞춘 GO 안내와 혼잡도 제보.</p><div className="reference-apply"><small>PICKGO 적용</small><strong>단일 추천 → GO 안내<br />→ 혼잡도 원탭 제보</strong></div></article>
-          <article className="reference-card"><div className="reference-no">02</div><h3>Citymapper</h3><p>걷기·탑승·환승·하차 단계마다 가장 필요한 정보만 제공.</p><div className="reference-apply"><small>PICKGO 적용</small><strong>출발 전 혼잡 → 이동 중 환승<br />→ 도착 전 하차 정보</strong></div></article>
-          <article className="reference-card"><div className="reference-no">03</div><h3>Moovit</h3><p>교통 상황과 사용자 맥락을 함께 고려하는 적합 경로 추천.</p><div className="reference-apply"><small>PICKGO 적용</small><strong>가장 빠른 길보다<br />지금 나에게 적합한 길</strong></div></article>
-        </div>
-      </section>
+      <ScreenGallery />
 
-      <section className="research-strip"><div><span>PICKGO PRINCIPLE</span><blockquote>목적지는 하나,<br />오늘의 최적 경로도 하나.</blockquote><p>모든 데이터와 추천은 포트폴리오용 Mock Data입니다.</p></div><button type="button" onClick={resetDemo}>PickGo 다시 체험하기 <span><ArrowUpRight aria-hidden="true" size={24} strokeWidth={2} /></span></button></section>
+      <section className="research-strip"><div className="final-brand"><PickGoLogo /></div><div><span>PICKGO PRINCIPLE</span><blockquote>목적지는 하나,<br />오늘의 최적 경로도 하나.</blockquote><p>모든 데이터와 추천은 포트폴리오용 Mock Data입니다.</p></div><button type="button" onClick={resetDemo}>PickGo 다시 체험하기 <span><ArrowUpRight aria-hidden="true" size={24} strokeWidth={2} /></span></button></section>
       <a className="go-to-top" href="#top" aria-label="페이지 맨 위로 이동"><ArrowUp aria-hidden="true" size={24} strokeWidth={2} /><span>TOP</span></a>
       <footer className="site-footer"><div className="brand"><PickGoLogo /></div><p>당신의 컨디션에 딱 맞는, 단 하나의 확신 경로.</p><span>UX PORTFOLIO · 2026</span></footer>
     </main>
@@ -420,8 +420,9 @@ function ScreenGallery() {
         <p>인터랙티브 프로토타입의 핵심 장면을 실제 앱 화면처럼 한눈에 비교할 수 있도록 정리했습니다.</p>
       </div>
 
+      <div className="screen-gallery-flow" aria-hidden="true"><span>상태 입력</span><i /><span>PickGo 추천</span><i /><span>이동 안내</span><i /><span>돌발상황 대응</span></div>
       <div className="screen-gallery-grid">
-        <article className="screen-capture-card">
+        <article className="screen-capture-card support-screen">
           <div className="screen-capture-label"><span>[HM–002]</span><strong>Main Home · Combined Input</strong></div>
           <div className="capture-device">
             <div className="capture-statusbar"><strong>9:41</strong><span><Signal aria-hidden="true" /><Wifi aria-hidden="true" /><BatteryFull aria-hidden="true" /></span></div>
@@ -448,7 +449,7 @@ function ScreenGallery() {
           </div>
         </article>
 
-        <article className="screen-capture-card">
+        <article className="screen-capture-card featured-screen">
           <div className="screen-capture-label"><span>[PA–001]</span><strong>Single-Path Matched · PickGo’s Choice</strong></div>
           <div className="capture-device">
             <div className="capture-statusbar"><strong>9:41</strong><span><Signal aria-hidden="true" /><Wifi aria-hidden="true" /><BatteryFull aria-hidden="true" /></span></div>
@@ -466,7 +467,26 @@ function ScreenGallery() {
           </div>
         </article>
 
-        <article className="screen-capture-card">
+        <article className="screen-capture-card support-screen guide-screen">
+          <div className="screen-capture-label"><span>[GD–001]</span><strong>Active Guide · Step by Step</strong></div>
+          <div className="capture-device capture-guide-device">
+            <div className="capture-statusbar"><strong>9:41</strong><span><Signal aria-hidden="true" /><Wifi aria-hidden="true" /><BatteryFull aria-hidden="true" /></span></div>
+            <div className="capture-guide-map"><PrototypeRouteMap variant="guide" destination="홍대입구역" /></div>
+            <div className="capture-guard-search"><Search aria-hidden="true" /><strong>홍대입구역</strong><X aria-hidden="true" /></div>
+            <div className="capture-active-pill"><i /> ACTIVE GUARD · 18분 남음</div>
+            <div className="capture-sheet capture-guide-sheet">
+              <i />
+              <div className="capture-guide-meta"><span>지금 해야 할 일</span><strong>STEP 1 / 3</strong></div>
+              <div className="capture-journey-phases"><span className="active"><b>1</b><small>걷기</small></span><span><b>2</b><small>탑승</small></span><span><b>3</b><small>하차</small></span></div>
+              <div className="capture-next-action"><CornerUpRight aria-hidden="true" /><p><strong>공항철도 15번 엘리베이터</strong><span>평지 120m · 오른쪽 통로</span></p></div>
+              <div className="capture-guide-context"><span>ETA 예시 업데이트</span><b>혼잡 보통</b></div>
+              <div className="capture-guide-actions"><span><TriangleAlert aria-hidden="true" /> 돌발상황 체험</span><strong>다음 단계 <ArrowRight aria-hidden="true" /></strong></div>
+            </div>
+            <span className="capture-homebar" />
+          </div>
+        </article>
+
+        <article className="screen-capture-card support-screen">
           <div className="screen-capture-label"><span>[DR–002]</span><strong>Active Guard · Smart Re-routing</strong></div>
           <div className="capture-device capture-guard-device">
             <div className="capture-statusbar"><strong>9:41</strong><span><Signal aria-hidden="true" /><Wifi aria-hidden="true" /><BatteryFull aria-hidden="true" /></span></div>
