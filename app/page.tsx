@@ -320,7 +320,6 @@ export default function Home() {
           <div className="story-intro"><p className="eyebrow">WHY PICKGO</p><h2>정보가 많아서가 아니라,<br />결정할 것이 많아서 힘들었습니다.</h2><p>목적지를 입력한 뒤 다시 조건을 고르고, 여러 경로를 비교하는 대신 PickGo는 목적지와 상태를 함께 받아 하나의 행동으로 연결합니다.</p></div>
           <aside className="story-principle" aria-label="PickGo 핵심 원칙">
             <span>PICKGO CORE</span>
-            <Route aria-hidden="true" />
             <strong>오늘의 상태까지 이해한<br />하나의 추천 경로</strong>
             <p>가장 빠른 길만 계산하지 않고,<br />지금 실제로 이동하기 좋은 길을 제안합니다.</p>
             <div><b>상태 반영</b><b>1–PATH</b><b>즉시 안내</b></div>

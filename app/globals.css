@@ -580,7 +580,6 @@ svg.lucide { width:24px; height:24px; flex:0 0 24px; display:block; stroke-width
 .story-principle { min-height:290px; padding:29px; display:flex; position:relative; overflow:hidden; flex-direction:column; justify-content:flex-end; border-radius:var(--radius-card); background:var(--primary); color:#fff; }
 .story-principle::after { content:''; width:210px; height:210px; position:absolute; right:-82px; top:-94px; border:1px solid rgba(255,255,255,.22); border-radius:50%; box-shadow:0 0 0 28px rgba(255,255,255,.04),0 0 0 64px rgba(255,255,255,.025); }
 .story-principle>span { position:absolute; left:29px; top:27px; color:#d9e9ff; font-size:12px; font-weight:850; letter-spacing:.13em; }
-.story-principle>svg { width:42px; height:42px; margin-bottom:22px; position:relative; z-index:1; stroke-width:1.7; }
 .story-principle>strong { position:relative; z-index:1; font-size:24px; line-height:1.3; letter-spacing:-.045em; }
 .story-principle>p { margin:12px 0 20px; position:relative; z-index:1; color:#d9e9ff; font-size:14px; line-height:1.65; }
 .story-principle>div { display:flex; flex-wrap:wrap; gap:6px; position:relative; z-index:1; }
