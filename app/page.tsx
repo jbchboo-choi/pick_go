@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { ConditionId, conditions, destinations, scenarios } from './mock-data';
 
@@ -259,12 +259,66 @@ function PrototypeRouteMap({ variant, destination }: { variant: 'home' | 'route'
     <div className={`coded-route-map map-${variant}`} aria-label={`${destination} 예시 경로 지도`}>
       <div className="local-map-tiles" aria-hidden="true">{mapTiles.map((tile) => <Image key={tile} src={`/map/${tile}`} alt="" width={256} height={256} draggable={false} unoptimized />)}</div>
       <span className="map-soft-overlay" />
-      <span className="coded-route route-one" /><span className="coded-route route-two" /><span className="coded-route route-three" />
+      <ContinuousRouteLine variant={variant} />
       <i className="route-origin" /><i className="route-stop" /><i className="route-destination" />
       <small className="coded-map-label">{destination}</small>
       <a className="map-attribution" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap</a>
     </div>
   );
+}
+
+function ContinuousRouteLine({ variant }: { variant: 'home' | 'route' | 'guide' | 'alternative' }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const drawRoute = () => {
+      const { width, height } = canvas.getBoundingClientRect();
+      if (!width || !height) return;
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * pixelRatio);
+      canvas.height = Math.round(height * pixelRatio);
+      const context = canvas.getContext('2d');
+      if (!context) return;
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      context.clearRect(0, 0, width, height);
+
+      const points = variant === 'alternative'
+        ? [[0.18, 0.72], [0.38, 0.44], [0.64, 0.6], [0.94, 0.31]]
+        : [[0.18, 0.72], [0.42, 0.4], [0.68, 0.52], [0.94, 0.31]];
+      const trace = () => {
+        context.beginPath();
+        points.forEach(([x, y], index) => {
+          if (index === 0) context.moveTo(x * width, y * height);
+          else context.lineTo(x * width, y * height);
+        });
+      };
+
+      context.lineCap = 'round';
+      context.lineJoin = 'round';
+      trace();
+      context.strokeStyle = 'rgba(255,255,255,.96)';
+      context.lineWidth = Math.max(9, Math.min(13, width / 32));
+      context.stroke();
+      trace();
+      context.strokeStyle = variant === 'alternative' ? '#2585c4' : '#168a5b';
+      context.lineWidth = Math.max(5, Math.min(7, width / 60));
+      context.stroke();
+    };
+
+    drawRoute();
+    const observer = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(drawRoute);
+    observer?.observe(canvas);
+    window.addEventListener('resize', drawRoute);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener('resize', drawRoute);
+    };
+  }, [variant]);
+
+  return <canvas ref={canvasRef} className="continuous-route-canvas" aria-hidden="true" />;
 }
 
 function FlowCard({ no, title, subtitle, items, accent }: { no: string; title: string; subtitle: string; items: string[]; accent: string }) {
