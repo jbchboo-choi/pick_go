@@ -171,8 +171,8 @@ button { color:inherit; }
 .topbar {
   max-width:none;
   padding-inline:max(36px,calc((100vw - 1320px) / 2 + 36px));
-  border-color:rgba(0,0,0,.08);
-  background:var(--surface-blue);
+  border-color:var(--line);
+  background:rgba(255,255,255,.96);
   backdrop-filter:blur(18px);
 }
 .demo-pill {
@@ -194,7 +194,7 @@ button { color:inherit; }
   inset:0 auto 0 50%;
   transform:translateX(-50%);
   border-bottom:1px solid var(--surface-blue-deep);
-  background:var(--surface-blue);
+  background:linear-gradient(180deg,#e8f3ff 0%,var(--surface-blue) 52%,#fbfdff 100%);
 }
 .hero h1,.system-flow-head h2,.story-intro h2,.reference-head h2 { font-weight:700; letter-spacing:-.055em; }
 .hero h1 em { color:var(--primary); }
