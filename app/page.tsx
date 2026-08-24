@@ -404,7 +404,7 @@ export default function Home() {
 
       <ScreenGallery />
 
-      <section className="research-strip"><div className="final-brand"><PickGoLogo /></div><div><span>PICKGO PRINCIPLE</span><blockquote>목적지는 하나,<br />오늘의 최적 경로도 하나.</blockquote><p>모든 데이터와 추천은 포트폴리오용 Mock Data입니다.</p></div><button type="button" onClick={resetDemo}>PickGo 다시 체험하기 <span><ArrowUpRight aria-hidden="true" size={24} strokeWidth={2} /></span></button></section>
+      <section className="research-strip"><div><span>PICKGO PRINCIPLE</span><blockquote>목적지는 하나,<br />오늘의 최적 경로도 하나.</blockquote><p>모든 데이터와 추천은 포트폴리오용 Mock Data입니다.</p></div><button type="button" onClick={resetDemo}>PickGo 다시 체험하기 <span><ArrowUpRight aria-hidden="true" size={24} strokeWidth={2} /></span></button></section>
       <a className="go-to-top" href="#top" aria-label="페이지 맨 위로 이동"><ArrowUp aria-hidden="true" size={24} strokeWidth={2} /><span>TOP</span></a>
       <footer className="site-footer"><div className="brand"><PickGoLogo /></div><p>당신의 컨디션에 딱 맞는, 단 하나의 확신 경로.</p><span>UX PORTFOLIO · 2026</span></footer>
     </main>
