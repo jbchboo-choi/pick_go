@@ -81,7 +81,7 @@ export default function Home() {
   return (
     <main className="site-shell">
       <header className="topbar">
-        <a className="brand" href="#top" aria-label="PickGo 홈"><span className="brand-dot">P</span><span>PickGo</span></a>
+        <a className="brand" href="#top" aria-label="PickGo 홈"><PickGoLogo /></a>
         <div className="demo-pill"><span /> PORTFOLIO DEMO</div>
         <a className="about-link" href="#flow">서비스 구조 <span>↘</span></a>
       </header>
@@ -244,9 +244,13 @@ export default function Home() {
       </section>
 
       <section className="research-strip"><div><span>PICKGO PRINCIPLE</span><blockquote>목적지는 하나,<br />오늘의 최적 경로도 하나.</blockquote><p>모든 데이터와 추천은 포트폴리오용 Mock Data입니다.</p></div><button type="button" onClick={resetDemo}>PickGo 다시 체험하기 <span>↗</span></button></section>
-      <footer className="site-footer"><div className="brand"><span className="brand-dot">P</span><span>PickGo</span></div><p>당신의 컨디션에 딱 맞는, 단 하나의 확신 경로.</p><span>UX PORTFOLIO · 2026</span></footer>
+      <footer className="site-footer"><div className="brand"><PickGoLogo /></div><p>당신의 컨디션에 딱 맞는, 단 하나의 확신 경로.</p><span>UX PORTFOLIO · 2026</span></footer>
     </main>
   );
+}
+
+function PickGoLogo() {
+  return <span className="pickgo-wordmark" aria-label="PickGo"><span className="wordmark-pick">Pick</span><span className="wordmark-go">Go</span><span className="wordmark-check" aria-hidden="true">✓</span></span>;
 }
 
 function PrototypeRouteMap({ variant, destination }: { variant: 'home' | 'route' | 'guide' | 'alternative'; destination: string }) {
