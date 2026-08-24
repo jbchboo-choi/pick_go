@@ -32,7 +32,7 @@
 }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
-body { margin:0; background:var(--cream); color:var(--ink); font-family:"Pretendard Variable",Pretendard,var(--font-geist),"Apple SD Gothic Neo","Noto Sans KR",sans-serif; font-size:14px; }
+body { margin:0; background:var(--cream); color:var(--ink); font-family:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Noto Sans KR",sans-serif; font-size:14px; }
 button,a,input,textarea,select { font:inherit; }
 button { color:inherit; }
 .site-shell { min-height:100svh; overflow:hidden; background:radial-gradient(circle at 76% 24%,#e6eee3 0,transparent 29%),var(--cream); }

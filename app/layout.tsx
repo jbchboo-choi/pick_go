@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
-import { Geist } from 'next/font/google';
 import './globals.css';
 
-const geist = Geist({ variable: '--font-geist', subsets: ['latin'] });
+const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : 'http://localhost:3000';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'PickGo — 오늘의 나에게 맞는 단 하나의 길',
   description: '사용자의 컨디션에 맞춰 가장 확실한 이동 경로 하나를 제안하는 PickGo 포트폴리오 데모',
   openGraph: {
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ko">
-      <body className={geist.variable}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
