@@ -166,11 +166,13 @@ button { color:inherit; }
 @media (max-width:520px) { .pickgo-wordmark{font-size:24px}.wordmark-check{top:-11px;font-size:17px}.wordmark-go::after{font-size:10px} }
 /* PickGo mobility design system — TMAP principles reinterpreted for this prototype */
 .site-shell {
-  background:linear-gradient(180deg,var(--surface-blue) 0,var(--surface-blue-deep) 680px,#fff 680px);
+  background:#fff;
 }
 .topbar {
+  max-width:none;
+  padding-inline:max(36px,calc((100vw - 1320px) / 2 + 36px));
   border-color:rgba(0,0,0,.08);
-  background:rgba(255,255,255,.82);
+  background:var(--surface-blue);
   backdrop-filter:blur(18px);
 }
 .demo-pill {
@@ -183,7 +185,17 @@ button { color:inherit; }
 .about-link { color:var(--body); }
 .about-link span,.eyebrow { color:var(--primary); }
 .about-link:hover { color:var(--primary); }
-.hero { min-height:calc(100svh - 124px); }
+.hero { min-height:calc(100svh - 124px); position:relative; isolation:isolate; }
+.hero::before {
+  content:'';
+  width:100vw;
+  position:absolute;
+  z-index:-1;
+  inset:0 auto 0 50%;
+  transform:translateX(-50%);
+  border-bottom:1px solid var(--surface-blue-deep);
+  background:var(--surface-blue);
+}
 .hero h1,.system-flow-head h2,.story-intro h2,.reference-head h2 { font-weight:700; letter-spacing:-.055em; }
 .hero h1 em { color:var(--primary); }
 .hero h1 em::after { height:3px; bottom:-7px; background:var(--primary); border-radius:0; transform:none; }
@@ -378,7 +390,8 @@ svg.lucide { width:24px; height:24px; flex:0 0 24px; display:block; stroke-width
 .flow-card.orange { border-color:#ffd2a8; background:#fffaf5; }
 .flow-card.green { border-color:#b7e4d6; background:#f7fffb; }
 @media (max-width:520px) {
-  .site-shell { background:linear-gradient(180deg,var(--surface-blue) 0,var(--surface-blue-deep) 720px,#fff 720px); }
+  .site-shell { background:#fff; }
+  .topbar { padding-inline:20px; }
   .hero h1 { letter-spacing:-.05em; }
   .system-flow-section,.story-section,.reference-section,.research-strip { border-radius:var(--radius-card); }
   .route-card-title>b { font-size:14px; }
