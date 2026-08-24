@@ -400,6 +400,7 @@ svg.lucide { width:24px; height:24px; flex:0 0 24px; display:block; stroke-width
 .hero .phone-prototype-label strong,.hero .prototype-tap-hint { color:rgba(255,255,255,.82); }
 .hero .prototype-tap-hint span { color:#fff; }
 .hero .map-grid { display:none; }
+.system-flow-head h2,.story-intro h2,.reference-head h2 { font-size:clamp(38px,4.5vw,60px); }
 /* Full-width section transition: removes the detached card gap below the hero */
 .system-flow-section {
   max-width:none;
@@ -418,6 +419,7 @@ svg.lucide { width:24px; height:24px; flex:0 0 24px; display:block; stroke-width
   .hero h1 { font-size:clamp(29px,8.5vw,34px); letter-spacing:-.05em; white-space:nowrap; }
   .system-flow-section { margin:0 0 20px; padding:54px 20px 38px; border-radius:0; }
   .story-section,.reference-section,.research-strip { border-radius:var(--radius-card); }
+  .system-flow-head h2,.story-intro h2,.reference-head h2 { font-size:35px; }
   .route-card-title>b { font-size:14px; }
   .route-infographic-row strong { font-size:11px; }
 }
