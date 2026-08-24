@@ -2,17 +2,23 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import {
+  Accessibility, ArrowDown, ArrowDownRight, ArrowLeft, ArrowRight, ArrowUp, ArrowUpRight,
+  BatteryFull, Briefcase, CarTaxiFront, Check, Circle, CircleCheckBig, Clock, CornerUpRight,
+  LoaderCircle, LocateFixed, MapPin, Moon, RotateCcw, Search, Signal, TrainFront,
+  TriangleAlert, UserRound, Wifi, X, Zap, type LucideIcon,
+} from 'lucide-react';
 import { ConditionId, conditions, destinations, scenarios } from './mock-data';
 
 type Step = 'input' | 'matching' | 'route' | 'guide' | 'arrival';
 
 const prototypeConditionOrder: ConditionId[] = ['urgent', 'tired', 'barrierFree', 'luggage', 'schedule'];
-const prototypeConditionMeta: Record<ConditionId, { icon: string; label: string }> = {
-  urgent: { icon: '⚡', label: '급해요' },
-  tired: { icon: '☾', label: '피곤해요' },
-  barrierFree: { icon: '♿', label: '배리어프리' },
-  luggage: { icon: '▣', label: '짐이 많아요' },
-  schedule: { icon: '◷', label: '늦으면 안 돼요' },
+const prototypeConditionMeta: Record<ConditionId, { icon: LucideIcon; label: string }> = {
+  urgent: { icon: Zap, label: '급해요' },
+  tired: { icon: Moon, label: '피곤해요' },
+  barrierFree: { icon: Accessibility, label: '배리어프리' },
+  luggage: { icon: Briefcase, label: '짐이 많아요' },
+  schedule: { icon: Clock, label: '늦으면 안 돼요' },
 };
 
 export default function Home() {
@@ -29,6 +35,7 @@ export default function Home() {
   const condition = conditions.find((item) => item.id === selected);
   const scenario = selected ? scenarios[selected] : null;
   const displayDestination = destination || scenario?.destination || '';
+  const GuideTurnIcon = scenario && guideIndex === scenario.steps.length - 1 ? ArrowDown : guideIndex === 1 ? ArrowUp : CornerUpRight;
   useEffect(() => {
     if (step !== 'matching' || !scenario) return;
     const timer = window.setTimeout(() => {
@@ -83,7 +90,7 @@ export default function Home() {
       <header className="topbar">
         <a className="brand" href="#top" aria-label="PickGo 홈"><PickGoLogo /></a>
         <div className="demo-pill"><span /> PORTFOLIO DEMO</div>
-        <a className="about-link" href="#flow">서비스 구조 <span>↘</span></a>
+        <a className="about-link" href="#flow">서비스 구조 <span><ArrowDownRight aria-hidden="true" size={24} strokeWidth={2} /></span></a>
       </header>
 
       <section className="hero" id="top">
@@ -92,9 +99,9 @@ export default function Home() {
           <h1>목적지와 오늘의 나,<br /><em>한 번에 알려주세요.</em></h1>
           <p className="lead">검색하고, 필터를 고르고, 경로를 비교하는 과정 없이<br />PickGo가 지금 가장 적합한 한 가지 길로 연결해요.</p>
           <div className="hero-flow-mini" aria-label="PickGo 이용 순서">
-            <span className={step === 'input' ? 'active' : ''}>통합 입력</span><i>→</i>
-            <span className={step === 'matching' ? 'active' : ''}>가중치 매칭</span><i>→</i>
-            <span className={step === 'route' || step === 'guide' ? 'active' : ''}>이동 안내</span><i>→</i>
+            <span className={step === 'input' ? 'active' : ''}>통합 입력</span><i><ArrowRight aria-hidden="true" size={24} strokeWidth={2} /></i>
+            <span className={step === 'matching' ? 'active' : ''}>가중치 매칭</span><i><ArrowRight aria-hidden="true" size={24} strokeWidth={2} /></i>
+            <span className={step === 'route' || step === 'guide' ? 'active' : ''}>이동 안내</span><i><ArrowRight aria-hidden="true" size={24} strokeWidth={2} /></i>
             <span className={step === 'arrival' ? 'active' : ''}>도착</span>
           </div>
         </div>
@@ -104,28 +111,29 @@ export default function Home() {
           <div className="phone-presentation">
             <div className="phone-prototype-label"><span>LIVE PROTOTYPE</span><strong>{step === 'input' ? '[HM–002] Combined Input' : step === 'matching' ? '[LG–001] Weighting Logic' : step === 'route' ? "[PA–001] PickGo's Choice" : step === 'guide' ? '[DR–002] Active Guard' : '[AR–001] Arrival'}</strong></div>
             <div className="phone-device-shell">
-              <div className="phone-statusbar"><strong>9:41</strong><span>●  Wi-Fi  ▰</span></div>
+              <div className="phone-statusbar"><strong>9:41</strong><span><Signal aria-hidden="true" size={24} strokeWidth={2} /><Wifi aria-hidden="true" size={24} strokeWidth={2} /><BatteryFull aria-hidden="true" size={24} strokeWidth={2} /></span></div>
               <section className={`condition-panel flow-panel ${selected === 'urgent' && step === 'guide' ? 'assistive' : ''}`} aria-label="PickGo 통합 경로 체험">
             {step === 'input' && (
               <div className="prototype-app-screen home-prototype screen-enter">
                 <div className="prototype-search-panel">
-                  <div className="prototype-search-row"><span>⌕</span><strong>검색</strong><button type="button" aria-label="프로필">P</button></div>
-                  <div className="prototype-destination-row"><span>●</span><input value={destination} onChange={(event) => setDestination(event.target.value)} placeholder="어디로 가시나요?" /><button type="button" onClick={() => setDestination('집')}>집</button><button type="button" onClick={() => setDestination('회사')}>회사</button></div>
+                  <div className="prototype-search-row"><span><Search aria-hidden="true" size={24} strokeWidth={2} /></span><strong>검색</strong><button type="button" aria-label="프로필"><UserRound aria-hidden="true" size={24} strokeWidth={2} /></button></div>
+                  <div className="prototype-destination-row"><span><MapPin aria-hidden="true" size={24} strokeWidth={2} /></span><input value={destination} onChange={(event) => setDestination(event.target.value)} placeholder="어디로 가시나요?" /><button type="button" onClick={() => setDestination('집')}>집</button><button type="button" onClick={() => setDestination('회사')}>회사</button></div>
                   <div className="prototype-quick-row">{destinations.map((item) => <button type="button" key={item} onClick={() => setDestination(item)}>{item}</button>)}</div>
                 </div>
                 <PrototypeRouteMap variant="home" destination={displayDestination || '목적지'} />
-                <button className="map-locate-button" type="button" aria-label="현재 위치">➤</button>
+                <button className="map-locate-button" type="button" aria-label="현재 위치"><LocateFixed aria-hidden="true" size={24} strokeWidth={2} /></button>
                 <div className="prototype-bottom-sheet input-sheet">
                   <span className="sheet-grabber" />
-                  <div className="sheet-heading"><div><small>COMBINED INPUT</small><strong>지금 어떤 이동이 필요하세요?</strong></div>{condition && <span>선택 완료 ✓</span>}</div>
+                  <div className="sheet-heading"><div><small>COMBINED INPUT</small><strong>지금 어떤 이동이 필요하세요?</strong></div>{condition && <span>선택 완료 <Check aria-hidden="true" size={24} strokeWidth={2} /></span>}</div>
                   <div className="status-icon-row">
                     {prototypeConditionOrder.map((id) => {
                       const active = selected === id;
                       const meta = prototypeConditionMeta[id];
-                      return <button key={id} type="button" className={active ? 'selected' : ''} onClick={() => setSelected(id)} aria-pressed={active}><span>{meta.icon}</span><small>{meta.label}</small></button>;
+                      const Icon = meta.icon;
+                      return <button key={id} type="button" className={active ? 'selected' : ''} onClick={() => setSelected(id)} aria-pressed={active}><span><Icon aria-hidden="true" size={24} strokeWidth={2} /></span><small>{meta.label}</small></button>;
                     })}
                   </div>
-                  <button className="prototype-cta" disabled={!selected || !destination.trim()} type="button" onClick={startMatching}>{selected && destination.trim() ? '지금 추천 경로 보기' : '목적지와 상태를 선택해주세요'}<span>→</span></button>
+                  <button className="prototype-cta" disabled={!selected || !destination.trim()} type="button" onClick={startMatching}>{selected && destination.trim() ? '지금 추천 경로 보기' : '목적지와 상태를 선택해주세요'}<span><ArrowRight aria-hidden="true" size={24} strokeWidth={2} /></span></button>
                   <p className="prototype-data-note">예시 데이터로 동작하는 포트폴리오 프로토타입</p>
                 </div>
               </div>
@@ -133,14 +141,14 @@ export default function Home() {
 
             {step === 'matching' && scenario && (
               <div className="panel-body matching-screen matching-prototype screen-enter" role="status" aria-live="polite">
-                <div className="prototype-top-nav"><button type="button" onClick={() => setStep('input')}>←</button><strong>PickGo</strong><span>02 / 05</span></div>
+                <div className="prototype-top-nav"><button type="button" onClick={() => setStep('input')} aria-label="입력 화면으로 돌아가기"><ArrowLeft aria-hidden="true" size={24} strokeWidth={2} /></button><strong>PickGo</strong><span>02 / 05</span></div>
                 <div className="logic-orbit"><span>P</span><i /><i /><i /></div>
                 <p className="step-label">STEP 02 · PICKGO LOGIC ENGINE</p>
                 <h2>{condition?.label.replace('요', '')} 상태에 맞춰<br />경로 가중치를 계산해요.</h2>
                 <div className="matching-inputs"><span>출발 · 서울역</span><i>+</i><span>도착 · {displayDestination}</span><i>+</i><span>상태 · {condition?.label}</span></div>
                 <div className="logic-cards">
-                  <div className="logic-card done"><span>✓</span><div><strong>예시 교통·날씨 데이터</strong><small>혼잡 보통 · 비 30% · 지연 없음</small></div></div>
-                  <div className="logic-card active"><span>↻</span><div><strong>상태별 동적 가중치</strong><small>{selected === 'barrierFree' ? '계단 제외 ∞ · 엘리베이터 최우선' : selected === 'luggage' ? '계단 제외 · 넓은 개찰구 우선' : selected === 'tired' ? '도보 최소 · 좌석 가능성 우선' : selected === 'urgent' ? '도착 시간 · 조작 단계 최우선' : '지연 위험 · 도착 편차 최우선'}</small></div></div>
+                  <div className="logic-card done"><span><Check aria-hidden="true" size={24} strokeWidth={2} /></span><div><strong>예시 교통·날씨 데이터</strong><small>혼잡 보통 · 비 30% · 지연 없음</small></div></div>
+                  <div className="logic-card active"><span><LoaderCircle aria-hidden="true" size={24} strokeWidth={2} /></span><div><strong>상태별 동적 가중치</strong><small>{selected === 'barrierFree' ? '계단 제외 ∞ · 엘리베이터 최우선' : selected === 'luggage' ? '계단 제외 · 넓은 개찰구 우선' : selected === 'tired' ? '도보 최소 · 좌석 가능성 우선' : selected === 'urgent' ? '도착 시간 · 조작 단계 최우선' : '지연 위험 · 도착 편차 최우선'}</small></div></div>
                   <div className="logic-card"><span>03</span><div><strong>단일 경로 + 이동수단 결정</strong><small>중간 비교 없이 1개 결과로 연결</small></div></div>
                 </div>
                 <div className="matching-loader"><span /><small>Mock Engine이 추천 결과를 만들고 있어요</small></div>
@@ -149,17 +157,17 @@ export default function Home() {
 
             {step === 'route' && scenario && (
               <div className="prototype-app-screen route-prototype screen-enter">
-                <div className="prototype-top-nav"><button type="button" onClick={() => setStep('input')}>←</button><strong>PickGo’s Choice</strong><button type="button" onClick={resetDemo}>↻</button></div>
+                <div className="prototype-top-nav"><button type="button" onClick={() => setStep('input')} aria-label="입력 화면으로 돌아가기"><ArrowLeft aria-hidden="true" size={24} strokeWidth={2} /></button><strong>PickGo’s Choice</strong><button type="button" onClick={resetDemo} aria-label="다시 시작"><RotateCcw aria-hidden="true" size={24} strokeWidth={2} /></button></div>
                 <div className="match-heading"><p><strong>{condition?.label}</strong> 상태와</p><h2><em>{scenario.fit}%</em> 일치하는 경로입니다</h2><div className="match-progress"><span style={{ width: `${scenario.fit}%` }} /></div></div>
                 <article className="matched-route-card">
                   <div className="route-card-title"><span>P</span><div><strong>{displayDestination}</strong><small>Route Card · 1-Path Matched</small></div><b>{scenario.minutes}분</b></div>
                   <PrototypeRouteMap variant="route" destination={displayDestination} />
-                  <div className="route-transit-row"><span>🚇 {scenario.transport.recommended}</span><span>🚕 택시 약 {Math.max(8, scenario.minutes - 4)}분</span></div>
-                  <div className="matched-reason"><small>MATCHED REASON DATA</small><div>{scenario.context.map((item) => <span key={item}>✓ {item}</span>)}</div></div>
+                  <div className="route-transit-row"><span><TrainFront aria-hidden="true" size={24} strokeWidth={2} /> {scenario.transport.recommended}</span><span><CarTaxiFront aria-hidden="true" size={24} strokeWidth={2} /> 택시 약 {Math.max(8, scenario.minutes - 4)}분</span></div>
+                  <div className="matched-reason"><small>MATCHED REASON DATA</small><div>{scenario.context.map((item) => <span key={item}><Check aria-hidden="true" size={24} strokeWidth={2} /> {item}</span>)}</div></div>
                 </article>
                 <div className="route-infographic-row"><div><strong>{scenario.walk}</strong><small>총 도보</small></div><i /><div><strong>{scenario.cost}</strong><small>예상 비용</small></div><i /><div><strong>{scenario.congestion.level}</strong><small>혼잡 예상</small></div></div>
                 <div className="route-reason-copy"><span>P</span><p><strong>{scenario.routeLabel}</strong>{scenario.reason}</p></div>
-                <div className="prototype-sticky-action"><button className="prototype-cta" type="button" onClick={startGuide}>GO · 안내 시작 <span>→</span></button><small>{scenario.minutes}분 뒤 도착 예정 · 예시 데이터</small></div>
+                <div className="prototype-sticky-action"><button className="prototype-cta" type="button" onClick={startGuide}>GO · 안내 시작 <span><ArrowRight aria-hidden="true" size={24} strokeWidth={2} /></span></button><small>{scenario.minutes}분 뒤 도착 예정 · 예시 데이터</small></div>
               </div>
             )}
 
@@ -167,23 +175,23 @@ export default function Home() {
               <div className={`prototype-app-screen guard-prototype screen-enter ${incident ? 'incident-open' : ''}`}>
                 <div className="guard-map-wrap">
                   <PrototypeRouteMap variant="guide" destination={displayDestination} />
-                  <div className="guard-search-bar"><span>⌕</span><strong>{displayDestination}</strong><button type="button" onClick={resetDemo}>×</button></div>
+                  <div className="guard-search-bar"><span><Search aria-hidden="true" size={24} strokeWidth={2} /></span><strong>{displayDestination}</strong><button type="button" onClick={resetDemo} aria-label="안내 종료"><X aria-hidden="true" size={24} strokeWidth={2} /></button></div>
                   <div className="active-guard-pill"><i /> ACTIVE GUARD · {Math.max(1, scenario.minutes - guideIndex * Math.ceil(scenario.minutes / 3))}분 남음</div>
                 </div>
 
                 {!incident && <div className="prototype-bottom-sheet guard-sheet">
                   <span className="sheet-grabber" />
                   <div className="guide-meta"><span>지금 해야 할 일</span><strong>STEP {guideIndex + 1} / {scenario.steps.length}</strong></div>
-                  <div className="journey-phases">{scenario.steps.map((item, index) => <div key={item.phase} className={index === guideIndex ? 'active' : index < guideIndex ? 'done' : ''}><span>{index < guideIndex ? '✓' : index + 1}</span><small>{item.phase}</small></div>)}</div>
-                  <div className="next-action"><span className="turn-arrow">{guideIndex === scenario.steps.length - 1 ? '↓' : guideIndex === 1 ? '↑' : '↱'}</span><div><strong>{scenario.steps[guideIndex].label}</strong><p>{scenario.steps[guideIndex].detail}</p></div></div>
+                  <div className="journey-phases">{scenario.steps.map((item, index) => <div key={item.phase} className={index === guideIndex ? 'active' : index < guideIndex ? 'done' : ''}><span>{index < guideIndex ? <Check aria-hidden="true" size={24} strokeWidth={2} /> : index + 1}</span><small>{item.phase}</small></div>)}</div>
+                  <div className="next-action"><span className="turn-arrow"><GuideTurnIcon aria-hidden="true" size={24} strokeWidth={2} /></span><div><strong>{scenario.steps[guideIndex].label}</strong><p>{scenario.steps[guideIndex].detail}</p></div></div>
                   <div className="guide-context-row"><span>ETA 예시 업데이트</span><span>혼잡 {congestionReport || scenario.congestion.level}</span></div>
-                  {selected === 'urgent' ? <button className={`sos-compact ${shared ? 'shared' : ''}`} type="button" onClick={() => setShared(!shared)}><b>{shared ? '✓' : 'SOS'}</b><span>{shared ? '위치 공유 데모 ON' : '보호자 위치 공유 데모'}</span></button> : <div className="compact-report"><button type="button" onClick={() => setShowReport(!showReport)}>혼잡도 제보 <b>{congestionReport || '선택'}</b></button>{showReport && <div>{['여유', '보통', '혼잡'].map((level) => <button key={level} type="button" onClick={() => { setCongestionReport(level); setShowReport(false); }}>{level}</button>)}</div>}</div>}
-                  <div className="guide-action-grid"><button type="button" onClick={() => setIncident(true)}>⚠ 돌발상황 체험</button><button type="button" onClick={advanceGuide}>{guideIndex === scenario.steps.length - 1 ? '도착 완료' : '다음 단계'} →</button></div>
+                  {selected === 'urgent' ? <button className={`sos-compact ${shared ? 'shared' : ''}`} type="button" onClick={() => setShared(!shared)}><b>{shared ? <Check aria-hidden="true" size={24} strokeWidth={2} /> : 'SOS'}</b><span>{shared ? '위치 공유 데모 ON' : '보호자 위치 공유 데모'}</span></button> : <div className="compact-report"><button type="button" onClick={() => setShowReport(!showReport)}>혼잡도 제보 <b>{congestionReport || '선택'}</b></button>{showReport && <div>{['여유', '보통', '혼잡'].map((level) => <button key={level} type="button" onClick={() => { setCongestionReport(level); setShowReport(false); }}>{level}</button>)}</div>}</div>}
+                  <div className="guide-action-grid"><button type="button" onClick={() => setIncident(true)}><TriangleAlert aria-hidden="true" size={24} strokeWidth={2} /> 돌발상황 체험</button><button type="button" onClick={advanceGuide}>{guideIndex === scenario.steps.length - 1 ? '도착 완료' : '다음 단계'} <ArrowRight aria-hidden="true" size={24} strokeWidth={2} /></button></div>
                 </div>}
 
                 {incident && <>
                   <div className="guard-dim" />
-                  <div className="system-alert-modal"><span>!</span><strong>System Alert</strong><p>전방 구간에 지연이 감지됐어요.<br />대안 경로로 변경하시겠어요?</p></div>
+                  <div className="system-alert-modal"><span><TriangleAlert aria-hidden="true" size={24} strokeWidth={2} /></span><strong>System Alert</strong><p>전방 구간에 지연이 감지됐어요.<br />대안 경로로 변경하시겠어요?</p></div>
                   <div className="alternative-sheet">
                     <span className="sheet-grabber" />
                     <small>ALTERNATIVE OPTION · SMART SWITCH</small>
@@ -197,17 +205,17 @@ export default function Home() {
 
             {step === 'arrival' && scenario && (
               <div className="panel-body arrival-screen screen-enter">
-                <div className="arrival-mark"><span>✓</span></div><p className="step-label">STEP 05 · ARRIVAL</p>
+                <div className="arrival-mark"><span><CircleCheckBig aria-hidden="true" size={24} strokeWidth={2} /></span></div><p className="step-label">STEP 05 · ARRIVAL</p>
                 <h2>{scenario.arrivalMessage}</h2><p className="arrival-sub">마지막 출구와 동선까지 오늘의 상태에 맞춰 안내했어요.</p>
                 <div className="impact-card"><span>오늘 PickGo가 아껴드린 것</span><strong>{scenario.impact}</strong><div className="impact-bars"><i /><i /><i /><i /></div></div>
                 <div className="arrival-stats"><div><strong>{scenario.minutes}분</strong><span>이동 시간</span></div><div><strong>{scenario.walk}</strong><span>걸은 거리</span></div><div><strong>{transportMode}</strong><span>최종 수단</span></div></div>
-                <button className="primary-button" type="button" onClick={resetDemo}>다른 조건으로 다시 체험하기 <span>↻</span></button>
+                <button className="primary-button" type="button" onClick={resetDemo}>다른 조건으로 다시 체험하기 <span><RotateCcw aria-hidden="true" size={24} strokeWidth={2} /></span></button>
               </div>
             )}
               </section>
               <div className="device-homebar" />
             </div>
-            <p className="prototype-tap-hint"><span>●</span> 목적지와 상태를 선택해 전체 흐름을 직접 눌러보세요.</p>
+            <p className="prototype-tap-hint"><span><Circle aria-hidden="true" size={24} strokeWidth={2} /></span> 목적지와 상태를 선택해 전체 흐름을 직접 눌러보세요.</p>
           </div>
         </div>
       </section>
@@ -243,7 +251,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="research-strip"><div><span>PICKGO PRINCIPLE</span><blockquote>목적지는 하나,<br />오늘의 최적 경로도 하나.</blockquote><p>모든 데이터와 추천은 포트폴리오용 Mock Data입니다.</p></div><button type="button" onClick={resetDemo}>PickGo 다시 체험하기 <span>↗</span></button></section>
+      <section className="research-strip"><div><span>PICKGO PRINCIPLE</span><blockquote>목적지는 하나,<br />오늘의 최적 경로도 하나.</blockquote><p>모든 데이터와 추천은 포트폴리오용 Mock Data입니다.</p></div><button type="button" onClick={resetDemo}>PickGo 다시 체험하기 <span><ArrowUpRight aria-hidden="true" size={24} strokeWidth={2} /></span></button></section>
       <footer className="site-footer"><div className="brand"><PickGoLogo /></div><p>당신의 컨디션에 딱 맞는, 단 하나의 확신 경로.</p><span>UX PORTFOLIO · 2026</span></footer>
     </main>
   );

@@ -310,6 +310,19 @@ button { color:inherit; }
 .coded-map-label { border-radius:4px; color:var(--body); }
 .map-locate-button:hover { border-color:var(--primary); color:var(--primary); }
 button:focus-visible,a:focus-visible,input:focus-visible { outline:2px solid var(--primary); outline-offset:2px; }
+svg.lucide { width:24px; height:24px; flex:0 0 24px; display:block; stroke-width:2; }
+.about-link span,.hero-flow-mini i,.phone-statusbar span,.sheet-heading>span,.prototype-cta span,.route-transit-row span,.matched-reason span,.guide-action-grid button,.research-strip button span { display:inline-flex; align-items:center; }
+.about-link span { vertical-align:middle; }
+.hero-flow-mini i { justify-content:center; }
+.phone-statusbar span { gap:3px; }
+.prototype-search-row>span { display:grid; place-items:center; transform:none; }
+.prototype-search-row button,.prototype-top-nav button,.map-locate-button,.guard-search-bar button { display:grid; place-items:center; }
+.prototype-destination-row>span { display:flex; align-items:center; }
+.sheet-heading>span,.route-transit-row span,.matched-reason span { gap:3px; }
+.route-transit-row span:last-child { justify-content:flex-end; }
+.guide-action-grid button { justify-content:center; gap:4px; }
+.sos-compact b { display:grid; place-items:center; }
+.research-strip button span { vertical-align:middle; }
 @media (max-width:520px) {
   .site-shell { background:linear-gradient(180deg,var(--surface-blue) 0,var(--surface-blue-deep) 720px,#fff 720px); }
   .hero h1 { letter-spacing:-.05em; }
