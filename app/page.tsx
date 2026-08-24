@@ -21,6 +21,98 @@ const prototypeConditionMeta: Record<ConditionId, { icon: LucideIcon; label: str
   schedule: { icon: Clock, label: '늦으면 안 돼요' },
 };
 
+function HeroRouteGraphic() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const draw = () => {
+      const bounds = canvas.getBoundingClientRect();
+      const width = bounds.width;
+      const height = bounds.height;
+      if (!width || !height) return;
+
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+
+      const context = canvas.getContext('2d');
+      if (!context) return;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      context.clearRect(0, 0, width, height);
+
+      const point = (x: number, y: number) => ({ x: width * x, y: height * y });
+      const p0 = point(0, .82);
+      const p1 = point(.06, .82);
+      const p2 = point(.12, .72);
+      const p3 = point(.24, .72);
+      const p4 = point(.34, .82);
+      const p5 = point(.42, .82);
+      const p6 = point(.49, .72);
+      const p7 = point(.49, .41);
+      const p8 = point(.56, .24);
+      const p9 = point(.75, .24);
+      const p10 = point(.81, .38);
+      const p11 = point(.81, .54);
+      const p12 = point(.90, .66);
+      const p13 = point(1, .66);
+
+      context.beginPath();
+      context.moveTo(p0.x, p0.y);
+      context.lineTo(p1.x, p1.y);
+      context.bezierCurveTo(width * .09, height * .82, width * .09, height * .72, p2.x, p2.y);
+      context.lineTo(p3.x, p3.y);
+      context.bezierCurveTo(width * .30, height * .72, width * .29, height * .82, p4.x, p4.y);
+      context.lineTo(p5.x, p5.y);
+      context.bezierCurveTo(width * .47, height * .82, width * .49, height * .79, p6.x, p6.y);
+      context.lineTo(p7.x, p7.y);
+      context.bezierCurveTo(width * .49, height * .30, width * .51, height * .24, p8.x, p8.y);
+      context.lineTo(p9.x, p9.y);
+      context.bezierCurveTo(width * .80, height * .24, width * .81, height * .30, p10.x, p10.y);
+      context.lineTo(p11.x, p11.y);
+      context.bezierCurveTo(width * .81, height * .62, width * .84, height * .66, p12.x, p12.y);
+      context.lineTo(p13.x, p13.y);
+      context.strokeStyle = 'rgba(255,255,255,.09)';
+      context.lineWidth = 2;
+      context.lineCap = 'round';
+      context.lineJoin = 'round';
+      context.stroke();
+
+      const drawStation = ({ x, y }: { x: number; y: number }, origin = false) => {
+        if (origin) {
+          context.beginPath();
+          context.arc(x, y, 16, 0, Math.PI * 2);
+          context.fillStyle = 'rgba(255,139,0,.05)';
+          context.fill();
+          context.beginPath();
+          context.arc(x, y, 10, 0, Math.PI * 2);
+          context.fillStyle = 'rgba(255,139,0,.09)';
+          context.fill();
+        }
+        context.beginPath();
+        context.arc(x, y, 5, 0, Math.PI * 2);
+        context.fillStyle = origin ? '#ff8b00' : 'rgba(255,255,255,.09)';
+        context.fill();
+        context.lineWidth = 2;
+        context.strokeStyle = origin ? 'rgba(255,139,0,.58)' : 'rgba(255,255,255,.18)';
+        context.stroke();
+      };
+
+      drawStation(p1, true);
+      [p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12].forEach((station) => drawStation(station));
+    };
+
+    draw();
+    const observer = new ResizeObserver(draw);
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, []);
+
+  return <div className="hero-route-graphic" aria-hidden="true"><canvas ref={canvasRef} /></div>;
+}
+
 export default function Home() {
   const [step, setStep] = useState<Step>('input');
   const [selected, setSelected] = useState<ConditionId | ''>('');
@@ -94,10 +186,7 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <div className="hero-route-graphic" aria-hidden="true">
-          <i className="route-arc route-arc-a" /><i className="route-arc route-arc-b" /><i className="route-arc route-arc-c" /><i className="route-arc route-arc-d" />
-          <span className="decor-station decor-origin" /><span className="decor-station decor-station-a" /><span className="decor-station decor-station-b" /><span className="decor-station decor-station-c" /><span className="decor-station decor-station-d" />
-        </div>
+        <HeroRouteGraphic />
         <div className="hero-copy">
           <p className="eyebrow">ONE INPUT · ONE DECISION</p>
           <h1>목적지와 오늘의 나,<br /><em>한 번에 알려주세요.</em></h1>
