@@ -94,6 +94,10 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
+        <div className="hero-route-graphic" aria-hidden="true">
+          <i className="route-arc route-arc-a" /><i className="route-arc route-arc-b" /><i className="route-arc route-arc-c" /><i className="route-arc route-arc-d" />
+          <span className="decor-station decor-origin" /><span className="decor-station decor-station-a" /><span className="decor-station decor-station-b" /><span className="decor-station decor-station-c" /><span className="decor-station decor-station-d" />
+        </div>
         <div className="hero-copy">
           <p className="eyebrow">ONE INPUT · ONE DECISION</p>
           <h1>목적지와 오늘의 나,<br /><em>한 번에 알려주세요.</em></h1>
