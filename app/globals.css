@@ -395,6 +395,7 @@ svg.lucide { width:24px; height:24px; flex:0 0 24px; display:block; stroke-width
 .flow-card.orange { border-color:#ffd2a8; background:#fffaf5; }
 .flow-card.green { border-color:#b7e4d6; background:#f7fffb; }
 .hero .eyebrow,.hero h1,.hero h1 em { color:#fff; }
+.hero h1 { font-size:clamp(40px,3.3vw,52px); line-height:1.12; white-space:nowrap; }
 .hero h1 em::after { background:rgba(255,255,255,.4); }
 .hero .lead { color:rgba(255,255,255,.82); }
 .hero .hero-flow-mini { color:rgba(255,255,255,.68); }
@@ -403,6 +404,7 @@ svg.lucide { width:24px; height:24px; flex:0 0 24px; display:block; stroke-width
 .hero .hero-flow-mini i { color:rgba(255,255,255,.58); }
 .hero .phone-prototype-label strong,.hero .prototype-tap-hint { color:rgba(255,255,255,.82); }
 .hero .prototype-tap-hint span { color:#fff; }
+.hero .map-grid { display:none; }
 /* Full-width section transition: removes the detached card gap below the hero */
 .system-flow-section {
   max-width:none;
@@ -418,7 +420,7 @@ svg.lucide { width:24px; height:24px; flex:0 0 24px; display:block; stroke-width
 @media (max-width:520px) {
   .site-shell { background:#fff; }
   .topbar { padding-inline:20px; }
-  .hero h1 { letter-spacing:-.05em; }
+  .hero h1 { font-size:clamp(29px,8.5vw,34px); letter-spacing:-.05em; white-space:nowrap; }
   .system-flow-section { margin:0 0 20px; padding:54px 20px 38px; border-radius:0; }
   .story-section,.reference-section,.research-strip { border-radius:var(--radius-card); }
   .route-card-title>b { font-size:14px; }
