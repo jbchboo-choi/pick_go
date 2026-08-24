@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { ConditionId, conditions, destinations, scenarios } from './mock-data';
 
 type Step = 'input' | 'matching' | 'route' | 'guide' | 'arrival';
@@ -249,13 +250,19 @@ export default function Home() {
 }
 
 function PrototypeRouteMap({ variant, destination }: { variant: 'home' | 'route' | 'guide' | 'alternative'; destination: string }) {
+  const mapTiles = [
+    'osm-16-55881-25380.png', 'osm-16-55882-25380.png', 'osm-16-55883-25380.png',
+    'osm-16-55881-25381.png', 'osm-16-55882-25381.png', 'osm-16-55883-25381.png',
+    'osm-16-55881-25382.png', 'osm-16-55882-25382.png', 'osm-16-55883-25382.png',
+  ];
   return (
     <div className={`coded-route-map map-${variant}`} aria-label={`${destination} 예시 경로 지도`}>
-      <span className="coded-road road-one" /><span className="coded-road road-two" /><span className="coded-road road-three" /><span className="coded-road road-four" /><span className="coded-road road-five" />
-      <span className="coded-block block-one" /><span className="coded-block block-two" /><span className="coded-block block-three" /><span className="coded-block block-four" />
+      <div className="local-map-tiles" aria-hidden="true">{mapTiles.map((tile) => <Image key={tile} src={`/map/${tile}`} alt="" width={256} height={256} draggable={false} unoptimized />)}</div>
+      <span className="map-soft-overlay" />
       <span className="coded-route route-one" /><span className="coded-route route-two" /><span className="coded-route route-three" />
       <i className="route-origin" /><i className="route-stop" /><i className="route-destination" />
       <small className="coded-map-label">{destination}</small>
+      <a className="map-attribution" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap</a>
     </div>
   );
 }
