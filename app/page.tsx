@@ -130,7 +130,7 @@ export default function Home() {
                       const active = selected === id;
                       const meta = prototypeConditionMeta[id];
                       const Icon = meta.icon;
-                      return <button key={id} type="button" className={active ? 'selected' : ''} onClick={() => setSelected(id)} aria-pressed={active}><span><Icon aria-hidden="true" size={24} strokeWidth={2} /></span><small>{meta.label}</small></button>;
+                      return <button key={id} type="button" data-condition={id} className={active ? 'selected' : ''} onClick={() => setSelected(id)} aria-pressed={active}><span><Icon aria-hidden="true" size={24} strokeWidth={2} /></span><small>{meta.label}</small></button>;
                     })}
                   </div>
                   <button className="prototype-cta" disabled={!selected || !destination.trim()} type="button" onClick={startMatching}>{selected && destination.trim() ? '지금 추천 경로 보기' : '목적지와 상태를 선택해주세요'}<span><ArrowRight aria-hidden="true" size={24} strokeWidth={2} /></span></button>
@@ -163,9 +163,9 @@ export default function Home() {
                   <div className="route-card-title"><span>P</span><div><strong>{displayDestination}</strong><small>Route Card · 1-Path Matched</small></div><b>{scenario.minutes}분</b></div>
                   <PrototypeRouteMap variant="route" destination={displayDestination} />
                   <div className="route-transit-row"><span><TrainFront aria-hidden="true" size={24} strokeWidth={2} /> {scenario.transport.recommended}</span><span><CarTaxiFront aria-hidden="true" size={24} strokeWidth={2} /> 택시 약 {Math.max(8, scenario.minutes - 4)}분</span></div>
-                  <div className="matched-reason"><small>MATCHED REASON DATA</small><div>{scenario.context.map((item) => <span key={item}><Check aria-hidden="true" size={24} strokeWidth={2} /> {item}</span>)}</div></div>
+                  <div className="matched-reason"><small>MATCHED REASON DATA</small><div>{scenario.context.map((item) => <span className={getContextTone(item)} key={item}><Check aria-hidden="true" size={24} strokeWidth={2} /> {item}</span>)}</div></div>
                 </article>
-                <div className="route-infographic-row"><div><strong>{scenario.walk}</strong><small>총 도보</small></div><i /><div><strong>{scenario.cost}</strong><small>예상 비용</small></div><i /><div><strong>{scenario.congestion.level}</strong><small>혼잡 예상</small></div></div>
+                <div className="route-infographic-row"><div><strong>{scenario.walk}</strong><small>총 도보</small></div><i /><div><strong>{scenario.cost}</strong><small>예상 비용</small></div><i /><div className="congestion-metric" data-level={scenario.congestion.level}><strong>{scenario.congestion.level}</strong><small>혼잡 예상</small></div></div>
                 <div className="route-reason-copy"><span>P</span><p><strong>{scenario.routeLabel}</strong>{scenario.reason}</p></div>
                 <div className="prototype-sticky-action"><button className="prototype-cta" type="button" onClick={startGuide}>GO · 안내 시작 <span><ArrowRight aria-hidden="true" size={24} strokeWidth={2} /></span></button><small>{scenario.minutes}분 뒤 도착 예정 · 예시 데이터</small></div>
               </div>
@@ -184,8 +184,8 @@ export default function Home() {
                   <div className="guide-meta"><span>지금 해야 할 일</span><strong>STEP {guideIndex + 1} / {scenario.steps.length}</strong></div>
                   <div className="journey-phases">{scenario.steps.map((item, index) => <div key={item.phase} className={index === guideIndex ? 'active' : index < guideIndex ? 'done' : ''}><span>{index < guideIndex ? <Check aria-hidden="true" size={24} strokeWidth={2} /> : index + 1}</span><small>{item.phase}</small></div>)}</div>
                   <div className="next-action"><span className="turn-arrow"><GuideTurnIcon aria-hidden="true" size={24} strokeWidth={2} /></span><div><strong>{scenario.steps[guideIndex].label}</strong><p>{scenario.steps[guideIndex].detail}</p></div></div>
-                  <div className="guide-context-row"><span>ETA 예시 업데이트</span><span>혼잡 {congestionReport || scenario.congestion.level}</span></div>
-                  {selected === 'urgent' ? <button className={`sos-compact ${shared ? 'shared' : ''}`} type="button" onClick={() => setShared(!shared)}><b>{shared ? <Check aria-hidden="true" size={24} strokeWidth={2} /> : 'SOS'}</b><span>{shared ? '위치 공유 데모 ON' : '보호자 위치 공유 데모'}</span></button> : <div className="compact-report"><button type="button" onClick={() => setShowReport(!showReport)}>혼잡도 제보 <b>{congestionReport || '선택'}</b></button>{showReport && <div>{['여유', '보통', '혼잡'].map((level) => <button key={level} type="button" onClick={() => { setCongestionReport(level); setShowReport(false); }}>{level}</button>)}</div>}</div>}
+                  <div className="guide-context-row"><span>ETA 예시 업데이트</span><span data-level={congestionReport || scenario.congestion.level}>혼잡 {congestionReport || scenario.congestion.level}</span></div>
+                  {selected === 'urgent' ? <button className={`sos-compact ${shared ? 'shared' : ''}`} type="button" onClick={() => setShared(!shared)}><b>{shared ? <Check aria-hidden="true" size={24} strokeWidth={2} /> : 'SOS'}</b><span>{shared ? '위치 공유 데모 ON' : '보호자 위치 공유 데모'}</span></button> : <div className="compact-report"><button type="button" onClick={() => setShowReport(!showReport)}>혼잡도 제보 <b>{congestionReport || '선택'}</b></button>{showReport && <div>{['여유', '보통', '혼잡'].map((level) => <button data-level={level} key={level} type="button" onClick={() => { setCongestionReport(level); setShowReport(false); }}>{level}</button>)}</div>}</div>}
                   <div className="guide-action-grid"><button type="button" onClick={() => setIncident(true)}><TriangleAlert aria-hidden="true" size={24} strokeWidth={2} /> 돌발상황 체험</button><button type="button" onClick={advanceGuide}>{guideIndex === scenario.steps.length - 1 ? '도착 완료' : '다음 단계'} <ArrowRight aria-hidden="true" size={24} strokeWidth={2} /></button></div>
                 </div>}
 
@@ -259,6 +259,14 @@ export default function Home() {
 
 function PickGoLogo() {
   return <span className="pickgo-wordmark" aria-label="PickGo"><span className="wordmark-pick">Pick</span><span className="wordmark-go">Go</span><span className="wordmark-check" aria-hidden="true">✓</span></span>;
+}
+
+function getContextTone(item: string) {
+  if (/지연 없음|위험 낮음|계단|엘리베이터|개찰구|좌석|도보 최소|환승 없음|실내/.test(item)) return 'success';
+  if (/혼잡|붐비/.test(item)) return 'warning';
+  if (/지연|운행 문제/.test(item)) return 'danger';
+  if (/시간|개방|비 /.test(item)) return 'time';
+  return 'neutral';
 }
 
 function PrototypeRouteMap({ variant, destination }: { variant: 'home' | 'route' | 'guide' | 'alternative'; destination: string }) {

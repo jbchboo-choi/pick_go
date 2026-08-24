@@ -13,6 +13,16 @@
   --surface:#f3f5f7;
   --surface-blue:#f1f8ff;
   --surface-blue-deep:#d3e8ff;
+  --orange:#e56910;
+  --orange-soft:#fff3e7;
+  --yellow:#9a6700;
+  --yellow-soft:#fff7d6;
+  --mint:#0f7b5a;
+  --mint-soft:#dcf7ee;
+  --red:#c9372c;
+  --red-soft:#ffebe6;
+  --neutral:#5e6c84;
+  --neutral-soft:#f1f2f4;
   --line:#e2e2e2;
   --radius-card:19px;
   --radius-control:12px;
@@ -323,6 +333,50 @@ svg.lucide { width:24px; height:24px; flex:0 0 24px; display:block; stroke-width
 .guide-action-grid button { justify-content:center; gap:4px; }
 .sos-compact b { display:grid; place-items:center; }
 .research-strip button span { vertical-align:middle; }
+/* Semantic mobility colors: brand, urgency, caution, success, danger, neutral */
+.status-icon-row button[data-condition="urgent"]>span,
+.status-icon-row button[data-condition="schedule"]>span { border-color:#ffd2a8; background:var(--orange-soft); color:var(--orange); }
+.status-icon-row button[data-condition="luggage"]>span,
+.status-icon-row button[data-condition="barrierFree"]>span { border-color:#9ee6d3; background:var(--mint-soft); color:var(--mint); }
+.status-icon-row button[data-condition="tired"]>span { border-color:#d7dce2; background:var(--neutral-soft); color:var(--neutral); }
+.status-icon-row button.selected>span { border-color:var(--primary); background:var(--surface-blue); color:var(--primary); box-shadow:inset 0 0 0 1px var(--primary); }
+.status-icon-row button[data-condition="urgent"] small,
+.status-icon-row button[data-condition="schedule"] small { color:#8f4b13; }
+.status-icon-row button[data-condition="luggage"] small,
+.status-icon-row button[data-condition="barrierFree"] small { color:#216e5a; }
+.status-icon-row button.selected small { color:var(--primary); }
+.logic-card.done { border-color:#b7e4d6; background:#f0fff9; }
+.logic-card.done>span { background:var(--mint-soft); color:var(--mint); }
+.matched-reason span.success { background:var(--mint-soft); color:var(--mint); }
+.matched-reason span.warning { background:var(--yellow-soft); color:var(--yellow); }
+.matched-reason span.danger { background:var(--red-soft); color:var(--red); }
+.matched-reason span.time { background:var(--orange-soft); color:var(--orange); }
+.matched-reason span.neutral { background:var(--neutral-soft); color:var(--neutral); }
+.route-infographic-row .congestion-metric { margin:-6px 4px; padding:6px 2px; border-radius:7px; background:var(--yellow-soft); }
+.route-infographic-row .congestion-metric strong { color:var(--yellow); }
+.route-infographic-row .congestion-metric[data-level="여유"] { background:var(--mint-soft); }
+.route-infographic-row .congestion-metric[data-level="여유"] strong { color:var(--mint); }
+.route-infographic-row .congestion-metric[data-level="혼잡"] { background:var(--orange-soft); }
+.route-infographic-row .congestion-metric[data-level="혼잡"] strong { color:var(--orange); }
+.route-reason-copy { border-color:#b7e4d6; background:#f0fff9; }
+.route-reason-copy>span { background:var(--mint); }
+.guide-context-row span:last-child { padding:3px 6px; border-radius:4px; background:var(--yellow-soft); color:var(--yellow); font-weight:700; }
+.guide-context-row span:last-child[data-level="여유"] { background:var(--mint-soft); color:var(--mint); }
+.guide-context-row span:last-child[data-level="혼잡"] { background:var(--orange-soft); color:var(--orange); }
+.compact-report>div button[data-level="여유"] { background:var(--mint-soft); color:var(--mint); }
+.compact-report>div button[data-level="보통"] { background:var(--yellow-soft); color:var(--yellow); }
+.compact-report>div button[data-level="혼잡"] { background:var(--orange-soft); color:var(--orange); }
+.guide-action-grid button:first-child { background:var(--yellow-soft); color:var(--yellow); }
+.system-alert-modal { border-color:#ffb8b1; }
+.system-alert-modal>span { background:var(--red); }
+.system-alert-modal strong { color:var(--red); }
+.alternative-copy b { color:var(--mint); }
+.alternative-actions button:last-child { background:var(--mint); }
+.flow-card.blue .flow-icon { border-color:#e5f0ff; background:var(--primary); box-shadow:0 0 0 2px #aacbff; }
+.flow-card.green .flow-icon { border-color:#d4f5e9; background:var(--mint); box-shadow:0 0 0 2px #8ed7c3; }
+.flow-card.orange .flow-icon { border-color:#fff0d8; background:var(--orange); box-shadow:0 0 0 2px #ffc98f; }
+.flow-card.orange { border-color:#ffd2a8; background:#fffaf5; }
+.flow-card.green { border-color:#b7e4d6; background:#f7fffb; }
 @media (max-width:520px) {
   .site-shell { background:linear-gradient(180deg,var(--surface-blue) 0,var(--surface-blue-deep) 720px,#fff 720px); }
   .hero h1 { letter-spacing:-.05em; }
