@@ -211,7 +211,7 @@ export default function Home() {
             {step === 'input' && (
               <div className="prototype-app-screen home-prototype screen-enter">
                 <div className="prototype-search-panel">
-                  <div className="prototype-search-row prototype-origin-row"><span><LocateFixed aria-hidden="true" size={24} strokeWidth={2} /></span><div className="prototype-origin-copy"><small>출발</small><strong>현재 위치 · 서울역</strong><b>예시 위치</b></div><button type="button" onClick={() => setLocationChecked(true)} aria-label="현재 위치 다시 확인"><LocateFixed aria-hidden="true" size={24} strokeWidth={2} /></button></div>
+                  <div className="prototype-search-row prototype-origin-row"><span><LocateFixed aria-hidden="true" size={24} strokeWidth={2} /></span><div className="prototype-origin-copy"><strong>서울역</strong><b>현재 위치</b></div><button type="button" onClick={() => setLocationChecked(true)} aria-label="현재 위치 다시 확인"><LocateFixed aria-hidden="true" size={24} strokeWidth={2} /></button></div>
                   <div className="prototype-destination-row"><span><MapPin aria-hidden="true" size={24} strokeWidth={2} /></span><input value={destination} onChange={(event) => setDestination(event.target.value)} placeholder="목적지를 검색하세요" aria-label="목적지 검색" /><button type="button" onClick={() => setDestination('집')}>집</button><button type="button" onClick={() => setDestination('회사')}>회사</button></div>
                   <div className="prototype-quick-row">{destinations.map((item) => <button type="button" key={item} onClick={() => setDestination(item)}>{item}</button>)}</div>
                   <p className={`prototype-location-note ${locationChecked ? 'checked' : ''}`}><Check aria-hidden="true" size={14} strokeWidth={2} />{locationChecked ? '현재 위치를 다시 확인했어요 · 서울역 예시' : '현재 위치를 출발지로 사용해요 · 서울역 예시'}</p>
@@ -430,7 +430,7 @@ function ScreenGallery() {
           <div className="capture-device">
             <div className="capture-statusbar"><strong>9:41</strong><span><Signal aria-hidden="true" /><Wifi aria-hidden="true" /><BatteryFull aria-hidden="true" /></span></div>
             <div className="capture-search">
-              <div><LocateFixed aria-hidden="true" /><span>출발 · 현재 위치</span><b className="capture-origin-badge">예시</b></div>
+              <div className="capture-origin-row"><LocateFixed aria-hidden="true" /><span>서울역</span><b className="capture-origin-badge">현재 위치</b></div>
               <div><MapPin aria-hidden="true" /><span>목적지 · 강남역</span><b>집</b><b>회사</b></div>
             </div>
             <div className="capture-quick"><span>시청역</span><span>홍대입구역</span><span>강남역</span></div>
