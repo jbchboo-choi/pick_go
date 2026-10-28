@@ -140,9 +140,16 @@ button { color:inherit; }
 .prototype-app-screen { min-height:680px; position:relative; overflow:hidden; background:#f5f7f6; }
 .prototype-search-panel { min-height:112px; padding:13px 15px 9px; position:relative; z-index:5; border-bottom:1px solid #dce2de; background:rgba(255,255,255,.97); box-shadow:0 5px 16px rgba(35,59,45,.07); }
 .prototype-search-row,.prototype-destination-row { display:flex; align-items:center; gap:9px; }
-.prototype-search-row { height:34px; padding:0 9px; border:1px solid #cfd5d1; border-radius:10px 10px 0 0; color:#7c8580; }
+.prototype-search-row { min-height:42px; padding:5px 9px; border:1px solid #cfd5d1; border-radius:10px 10px 0 0; color:#7c8580; }
 .prototype-search-row>span { font-size:18px; transform:rotate(-15deg); }.prototype-search-row strong { flex:1; font-size:12px; font-weight:600; }.prototype-search-row button { width:25px; height:25px; border:0; border-radius:7px; background:#e7ece9; color:#77827b; font-size:12px; font-weight:800; cursor:pointer; }
+.prototype-origin-copy { min-width:0; flex:1; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:6px; }
+.prototype-origin-copy small { color:var(--primary); font-size:12px; font-weight:800; }
+.prototype-origin-copy strong { min-width:0; overflow:hidden; color:var(--ink); text-overflow:ellipsis; white-space:nowrap; }
+.prototype-origin-copy b { padding:3px 5px; border-radius:4px; background:var(--surface-blue); color:var(--primary); font-size:12px; white-space:nowrap; }
 .prototype-destination-row { height:40px; padding:0 6px 0 9px; border:1px solid #cfd5d1; border-top:0; border-radius:0 0 10px 10px; }.prototype-destination-row>span { color:#a5ada8; font-size:12px; }.prototype-destination-row input { min-width:0; flex:1; border:0; outline:0; background:transparent; color:#263129; font-size:12px; }.prototype-destination-row button { height:28px; padding:0 10px; border:0; border-radius:7px; background:#2682c5; color:white; font-size:12px; font-weight:750; cursor:pointer; }.prototype-quick-row { padding-top:8px; display:flex; gap:5px; }.prototype-quick-row button { padding:4px 7px; border:1px solid #d9dedb; border-radius:7px; background:#f7f9f7; color:#6d7870; font-size:12px; cursor:pointer; }
+.prototype-location-note { margin:7px 2px 0; display:flex; align-items:center; gap:5px; color:var(--muted-alt); font-size:12px; line-height:1.4; }
+.prototype-location-note svg { width:14px; height:14px; flex:0 0 14px; color:var(--primary); }
+.prototype-location-note.checked { color:var(--mint); }
 .coded-route-map { position:relative; overflow:hidden; background-color:#e8ebea; background-image:linear-gradient(31deg,transparent 46%,rgba(255,255,255,.94) 47%,rgba(255,255,255,.94) 54%,transparent 55%),linear-gradient(118deg,transparent 41%,rgba(255,255,255,.82) 42%,rgba(255,255,255,.82) 50%,transparent 51%); }
 .home-prototype>.coded-route-map { height:392px; }.coded-road { position:absolute; display:block; border:1px solid #d1d6d3; border-radius:30px; background:#f9faf9; }.coded-road.road-one { width:125%; height:21px; left:-13%; top:24%; transform:rotate(-18deg); }.coded-road.road-two { width:108%; height:18px; left:-4%; top:66%; transform:rotate(23deg); }.coded-road.road-three { width:18px; height:115%; left:25%; top:-8%; transform:rotate(12deg); }.coded-road.road-four { width:16px; height:110%; right:24%; top:-5%; transform:rotate(-9deg); }.coded-road.road-five { width:70%; height:17px; left:13%; top:46%; transform:rotate(-39deg); }
 .coded-block { position:absolute; display:block; border:1px solid #d3d7d5; background:rgba(211,215,213,.72); transform:rotate(-9deg); }.block-one { width:48px; height:40px; left:9%; top:17%; }.block-two { width:72px; height:52px; right:9%; top:17%; }.block-three { width:54px; height:47px; left:12%; bottom:13%; }.block-four { width:66px; height:42px; right:13%; bottom:10%; }
@@ -451,6 +458,7 @@ svg.lucide { width:24px; height:24px; flex:0 0 24px; display:block; stroke-width
 .capture-search>div+div { border-top:1px solid #e5e8ec; }
 .capture-search span { flex:1; }
 .capture-search b { padding:8px 10px; border-radius:7px; background:var(--primary); color:#fff; font-size:12px; }
+.capture-search .capture-origin-badge { padding:4px 7px; background:var(--surface-blue); color:var(--primary); }
 .capture-quick { margin:8px 14px 10px; display:flex; gap:5px; }
 .capture-quick span { padding:5px 8px; border:1px solid #dfe3e8; border-radius:100px; color:#5f6874; font-size:12px; }
 .capture-map-home { height:260px; }
